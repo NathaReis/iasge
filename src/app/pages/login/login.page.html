@@ -1,0 +1,64 @@
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-row>
+        <ion-col size-md="3" size="12" class="ion-padding ion-blue-bkg">
+          <img
+            src="https://images.prismic.io/ionicframeworkcom/ac68e1d9-9887-4e5a-9820-9290d06638de_ionic+logo+white+on+blue.png"
+            alt="Ionic logo"
+            loading="lazy"
+          />
+        </ion-col>
+        <ion-col size-md="9" size="12" class="welcome">
+          <ion-card-header>
+            <ion-card-title>
+              Welcome to Ionic Secure Solutions Starter
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-button (click)="login()" shape="round" color="primary">
+              Sign in
+            </ion-button>
+            <div class="ion-padding">
+              <p class="error">{{errorMessage}}</p>
+            </div>
+
+            <ion-icon
+              id="trigger-icon"
+              name="information-circle-outline"
+              size="large"
+              color="primary"
+            >
+            </ion-icon>
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-modal
+  trigger="trigger-icon"
+  [breakpoints]="[0, 0.2, 0.5, 1]"
+  [initialBreakpoint]="0.2"
+>
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>Username</h2>
+            <p>user@enterprise.com</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Password</h2>
+            <p>ionic</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
