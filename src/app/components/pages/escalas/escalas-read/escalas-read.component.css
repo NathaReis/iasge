@@ -1,0 +1,26 @@
+*
+{
+    color: var(--textColor);
+}
+
+.box, full-calendar
+{
+    width: 100vw;
+    max-width: 300px;
+    height: 60vh;
+}
+.btns 
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btns button
+{
+    margin-right: 10px;
+}
+.black
+{
+    color: #000;
+}

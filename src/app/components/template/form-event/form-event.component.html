@@ -1,0 +1,74 @@
+<div class="card shadow">
+    <div class="card-body">
+        <form>
+            <mat-form-field class="campo">
+                <mat-label>Nome do evento</mat-label>
+                <input [readonly]="!isEventEdit" matInput #input name="event_name" [(ngModel)]="event_name">
+            </mat-form-field> 
+
+            <mat-form-field class="campo">
+                <mat-label>Breve descrição</mat-label>
+                <textarea [readonly]="!isEventEdit" matInput name="event_desc" [(ngModel)]="event_desc"></textarea>
+            </mat-form-field> 
+
+            <mat-form-field class="campo">
+                <mat-label>Apenas um dia?</mat-label>
+                <mat-select [disabled]="!isEventEdit" name="isOneDay" [(ngModel)]="isOneDay">
+                  <mat-option value="true">Sim</mat-option>
+                  <mat-option value="">Não</mat-option>
+                  <mat-option *ngIf="isGerente" value="anual">Anual</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="campo" *ngIf="isOneDay">
+                <mat-label>Data do evento</mat-label>
+                <input [readonly]="!isEventEdit" matInput [matDatepicker]="picker" name="start_date" [(ngModel)]="start_date" [min]="minDate" [max]="maxDate">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="campo" *ngIf="!isOneDay">
+                <mat-label>Data do evento</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+                    <input [readonly]="!isEventEdit" matStartDate placeholder="Start date" name="start_date" [(ngModel)]="start_date" [min]="minDate" [max]="maxDate">
+                    <input [readonly]="!isEventEdit" matEndDate placeholder="End date" name="end_date" [(ngModel)]="end_date" [min]="minDate" [max]="maxDate">
+                </mat-date-range-input>
+                <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker touchUi #picker></mat-date-range-picker>
+            </mat-form-field>
+
+            <mat-form-field class="campo">
+                <mat-label>Horário inicial</mat-label>
+                <input [disabled]="isOneDay=='anual'" [readonly]="!isEventEdit" type="time" matInput #input name="start_time" [(ngModel)]="start_time">
+            </mat-form-field> 
+
+            <mat-form-field class="campo">
+                <mat-label>Horário final</mat-label>
+                <input [disabled]="isOneDay=='anual'" [readonly]="!isEventEdit" type="time" matInput #input name="end_time" [(ngModel)]="end_time">
+            </mat-form-field> 
+
+            <mat-radio-group [disabled]="isOneDay=='anual' || !isEventEdit" aria-label="O evento será" name="event_type" [(ngModel)]="event_type">
+                <mat-radio-button color="primary" value="public">Público (Com a igreja)</mat-radio-button>
+                <mat-radio-button color="primary" value="private">Privado (Só para o departamento)</mat-radio-button>
+            </mat-radio-group>
+
+            <button *ngIf="formParams.type=='create'" mat-button (click)="create()" class="add" style="color: #fff; text-shadow: 1px 1px 2px #0003;">
+                <mat-icon> create </mat-icon>
+                Criar
+            </button>
+            <button *ngIf="isEventEdit && formParams.type=='edit'" mat-button (click)="update()" class="add" style="margin-top: 5px; text-shadow: 1px 1px 2px #0003; color: #fff;">
+                <mat-icon> save </mat-icon>
+                Salvar
+            </button>
+            <button *ngIf="isEventEdit && formParams.type=='edit'" mat-button (click)="delete()" class="delete" style="margin-top: 5px; text-shadow: 1px 1px 2px #0003; color: #fff;">
+                <mat-icon> delete </mat-icon>
+                Deletar
+            </button>
+            <button routerLink="/eventos" mat-button class="view" style="margin-top: 5px; text-shadow: 1px 1px 2px #0003; color: #fff;">
+                Voltar
+            </button>           
+        </form>
+    </div>
+</div>

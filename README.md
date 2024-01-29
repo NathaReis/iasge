@@ -1,35 +1,27 @@
-# Ionic Secure Solutions Starter
+# Frontend
 
-A showcase app of Ionic App Platform technologies, including [Ionic Framework](https://ionicframework.com), [Capacitor](https://capacitorjs.com), [Appflow](https://ionic.io/appflow), and [Ionic Secure Solutions solutions](https://go.ionic.io/ionic-enterprise-free-trial).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
-| <img src="https://user-images.githubusercontent.com/7469758/169586741-dddafdde-b328-4ba2-93e0-064219de9dc0.PNG" width="350" alt="Ionic Secure Solutions Starter Login Page Screenshot on iOS" /> | <img src="https://user-images.githubusercontent.com/7469758/169586745-2dcfb155-f1d6-4b21-a16f-7a8863273328.PNG" width="350" alt="Ionic Secure Solutions Starter Account Page Screenshot on iOS" /> | 
-|:---:|:---:|
-| [Login Page](https://github.com/ionic-team/ionic-enterprise-starter/tree/main/src/app/pages/login) | [Account Page](https://github.com/ionic-team/ionic-enterprise-starter/tree/main/src/app/pages/account) |
+## Development server
 
-## Try the App
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-To log into Ionic Secure Solutions Starter, use username **user@enterprise.com** and password: **ionic**.
+## Code scaffolding
 
-## Tutorial
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Want to see how the Ionic Secure Solutions Starter was made? [Follow along the step-by-step tutorial](https://ionic.io/docs/enterprise-starter).
+## Build
 
-## Tech Details
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-- Native runtime: [Capacitor 3](https://capacitorjs.com)
-- Frameworks: Ionic Framework 6 and Angular 13
-- Capacitor Core plugins
-- Ionic Secure Solutions: [Auth Connect](https://ionic.io/products/auth-connect), [Identity Vault](https://ionic.io/products/identity-vault), [Secure Storage](https://ionic.io/products/secure-storage)
+## Running unit tests
 
-## How to Run
-> Note: Installing and running this app requires a subscription to the [Ionic Standard or Ionic Enterprise plans](https://ionic.io/pricing).
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-__Want to try Ionic's Secure Solutions in your app?__ [Sign up for a free trial](https://dashboard.ionicframework.com/personal/apps?native_trial=1&utm_medium=referral&utm_source=git_hub&utm_campaign=is3_native_trial).
+## Running end-to-end tests
 
-- Install the Ionic CLI: `npm install -g @ionic/cli`
-- Clone this repository: `git clone https://github.com/ionic-team/ionic-enterprise-starter.git`
-- Navigate to repo in a terminal: `cd ionic-enterprise-starter`
-- Add an Ionic Enterprise Native key into your `.bash_profile` file or as an Environment Variable on Windows: `export ENT_NATIVE_KEY="key_4e9d5..."`
-- Install dependencies (this will fail if you don't have an Ionic Native key): `npm i`
-- Run locally in a browser: `ionic serve`
-- Deploy to a mobile device: See details [here](https://capacitorjs.com/docs/basics/running-your-app).
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

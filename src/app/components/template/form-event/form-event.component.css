@@ -1,0 +1,12 @@
+.card
+{
+    width: 90vw;
+    max-width: 300px;
+    background-color: var(--background);
+    color: var(--textColor);
+}
+textarea 
+{
+    min-height: 70px;
+    max-height: 70px;
+}

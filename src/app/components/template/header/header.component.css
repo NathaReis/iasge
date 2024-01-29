@@ -1,0 +1,53 @@
+.header
+{
+    background: var(--primaryColor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    cursor: default;
+}
+
+.header .logo
+{
+    background-color: var(--background);
+    color: var(--textColor);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 2vh;
+}
+
+.header .logo img 
+{
+    height: 8vh;
+    width: 8vh;
+    border-radius: 50%;
+}
+
+.header .title-group
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--secondColor);
+    cursor: pointer;
+}
+
+.theme
+{
+    margin-top: 2vh;
+    color: var(--secondColor);
+    cursor: pointer;
+}
+
+@media(min-width: 500px)
+{
+    .theme
+    {
+        position: absolute;
+        right: 10px
+    }
+}
