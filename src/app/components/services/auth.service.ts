@@ -45,35 +45,11 @@ export class AuthService {
             })
 
           const usuario = (usersList.filter(element => element.Nome == user_name.split('.')[0] && element.Sobrenome == user_name.split('.')[1] && element.Senha == password))[0];
-
           if(usuario)
           {
             const Igreja: string = usuario.Igreja;
             const Perfil: string = usuario.Perfil;
-            this.data.getIgreja(Igreja).subscribe((res) => 
-            {
-              const igreja: Igreja | any = res.data();
-              if(igreja)
-              {
-                this.data.getPerfil(Perfil).subscribe((res) => 
-                {
-                  const perfil: Perfil | any = res.data();
-                  if(perfil)
-                  {
-                    //LOGAR
-                    this.logar([usuario,perfil.Nome,Igreja]);
-                  }
-                  else
-                  {
-                    this.snack.openSnackBar('Usuário não possui um perfil!', 2000);
-                  }
-                })//Buscar a Perfil
-              }
-              else 
-              {
-                this.snack.openSnackBar('Usuário não possui uma igreja!', 2000);
-              }
-            })//Buscar a Igreja
+            this.logar([usuario.id,Perfil,Igreja]);
           }
           else 
           {
@@ -99,29 +75,19 @@ export class AuthService {
     let token = '';
 
     //IdUser
-    token = `${dados[0].id}.`;
-    
-    //7 dígitos do perfil
-    switch(dados[1])
-    {
-      case 'Administrador':
-        token += '7832456.';
-        break;
-      case 'Comunicador':
-        token += '5698214.';
-        break;
-      case 'Diretor':
-        token += '4789562.';
-        break;
-      default:
-        token += '6547891.';
-    }
+    token = `${dados[0]}.`;
+
+    //IdPerfil
+    token += `${dados[1]}.`
 
     //IdIgreja
     token += `${dados[2]}.`;
 
+
     //IdMasck
-    token += `${dados[0].id}`
+    token += `${dados[0]}`
+    
+    
 
     localStorage.setItem('token', token);
     this.router.navigate(['home']);

@@ -4,11 +4,11 @@
         <button class="hamburguer" (click)="navMenu()"></button>
         <ul class="nav-list">
             <li><a routerLink="home">Sobre</a></li>
-            <li><a routerLink="escalas">Escalas</a></li>
-            <li><a routerLink="eventos">Eventos</a></li>
-            <li><a routerLink="usuarios">Usuários</a></li>
-            <li><a routerLink="igrejas">Igrejas</a></li>
-            <li><a routerLink="config">Configurações</a></li>
+            <li *ngIf="escalas"><a routerLink="escalas">Escalas</a></li>
+            <li *ngIf="eventos"><a routerLink="eventos">Eventos</a></li>
+            <li *ngIf="usuarios"><a routerLink="usuarios">Usuários</a></li>
+            <li *ngIf="igrejas"><a routerLink="igrejas">Igrejas</a></li>
+            <li *ngIf="config"><a routerLink="config">Configurações</a></li>
         </ul>
     </nav>
     <!-- <span class="theme">

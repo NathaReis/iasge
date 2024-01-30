@@ -10,6 +10,12 @@ import { BodyService } from '../../services/body.service';
 })
 export class HeaderComponent implements OnInit{
 
+  escalas = false;
+  eventos = false;
+  usuarios = false;
+  igrejas = false;
+  config = false;
+
   constructor(
     private headerService: HeaderService,
     private perfilService: PerfilService,

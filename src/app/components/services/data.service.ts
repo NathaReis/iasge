@@ -11,13 +11,8 @@ export class DataService {
 
   constructor(private afs : AngularFirestore) { }
 
-  //USER
-  // add 
-  addUser(user: Usuario)
-  {
-    return this.afs.collection('/usuario').add(user);
-  }
-  // get all usuario
+  //Usuarios
+  // PESQUISA
   getAllUsers()
   {
     return this.afs.collection('/usuario').snapshotChanges();
@@ -25,20 +20,16 @@ export class DataService {
   // get one usuario
   getUser(id?: string)
   {
-    //return this.afs.doc(`/usuario/${id}`).get();
     return this.afs.collection('usuario', ref => {
       return ref
       .where('id', '==', id)
     }).valueChanges();
   }
-  login(user_name: string, password: string)
+  // FUNÇÕES
+  // add 
+  addUser(user: Usuario)
   {
-    return this.afs.collection('usuario', ref => {
-      return ref
-      .where('Nome', '==', user_name.split('.')[0])
-      .where('Sobrenome', '==', user_name.split('.')[1])
-      .where('Senha', '==', password)
-    }).valueChanges();
+    return this.afs.collection('/usuario').add(user);
   }
   // delete 
   deleteUser(id: string)
@@ -62,9 +53,11 @@ export class DataService {
   {
     return this.afs.doc(`/perfil/${id}`).get();
   }
-  getAllPerfil()
+
+  //PerfilSistemas
+  getPerfilSistemas(perfil: string, igreja: string)
   {
-    return this.afs.collection('/perfis').snapshotChanges();
+    return this.afs.collection('/perfiligrejasistemas').snapshotChanges();
   }
 
   //EVENT

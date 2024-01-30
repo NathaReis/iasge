@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Perfil } from '../models/perfil';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PerfilService {
+export class PerfilService{
+
+  constructor(private data: DataService) { }
+
+  getPerfilSistema(perfil: string, igreja: string)
+  {
+    this.data.getPerfilSistemas(perfil, igreja).subscribe(res =>
+      {
+        console.log(res);
+      })
+  }
 
   _perfilData = new BehaviorSubject<Perfil>({
     // type: '',
@@ -18,7 +29,6 @@ export class PerfilService {
     // home: false
   });
 
-  constructor() { }
 
   // métodos
 
