@@ -78,4 +78,9 @@ export class HeaderComponent implements OnInit{
       this.isTheme('dark-theme');
     }
   }
+
+  navMenu(): void {
+    const nav = document.querySelector(".nav");
+    nav?.classList.toggle("active");
+  }
 }
