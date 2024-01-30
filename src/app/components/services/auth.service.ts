@@ -61,7 +61,7 @@ export class AuthService {
                   if(perfil)
                   {
                     //LOGAR
-                    this.logar([usuario,Igreja,perfil.Nome]);
+                    this.logar([usuario,perfil.Nome,Igreja]);
                   }
                   else
                   {
@@ -90,60 +90,47 @@ export class AuthService {
   // Logout
   logout() 
   {
-    localStorage.removeItem("all_view");
-    localStorage.removeItem('usermask_id');
-    localStorage.removeItem('usermask_name');
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('logado');
-
-    //PAGES
-    localStorage.removeItem("departamentos"),
-    localStorage.removeItem("associados"),
-    localStorage.removeItem("eventos"),
-    localStorage.removeItem("all_view"),
-
-    //Is Editor de Escalas
-    localStorage.removeItem('isEditor');
-    
+    localStorage.removeItem('token')
     this.router.navigate(['login']);
   }
   // Login
   logar(dados: any) 
   {
     let token = '';
+
+    //IdUser
+    token = `${dados[0].id}.`;
     
     //7 dígitos do perfil
-    switch(dados[2])
+    switch(dados[1])
     {
       case 'Administrador':
-        token = '7832456';
+        token += '7832456.';
         break;
       case 'Comunicador':
-        token = '5698214';
+        token += '5698214.';
         break;
       case 'Diretor':
-        token = '4789562';
+        token += '4789562.';
         break;
       default:
-        token = '6547891';
+        token += '6547891.';
     }
 
+    //IdIgreja
+    token += `${dados[2]}.`;
 
-    
+    //IdMasck
+    token += `${dados[0].id}`
 
-    // localStorage.setItem('usermask_id', dados[0].uid)
-    // localStorage.setItem('usermask_name', dados[0].Nome);
-    // localStorage.setItem('user_name', dados[0].Nome)
-    // localStorage.setItem('user_id', dados[0].uid)
-    // localStorage.setItem('igreja', dados[1]);
-    // this.router.navigate(['home']);
+    localStorage.setItem('token', token);
+    this.router.navigate(['home']);
   }
 
   // Segurança
   auth_guard()
   {
-    if(!localStorage.getItem('logado'))
+    if(!localStorage.getItem('token'))
     {
       this.router.navigate(['login']);
     }
@@ -151,7 +138,7 @@ export class AuthService {
   // Login
   isLogin()
   {
-    if(localStorage.getItem('logado'))
+    if(localStorage.getItem('token'))
     {
       this.router.navigate(['home'])
     }
