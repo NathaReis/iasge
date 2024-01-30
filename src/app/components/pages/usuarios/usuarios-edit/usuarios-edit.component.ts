@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
 import { SnackbarService } from 'src/app/components/services/snackbar.service';
 
 @Component({
-  selector: 'app-departamentos-create',
-  templateUrl: './departamentos-create.component.html',
-  styleUrls: ['./departamentos-create.component.css']
+  selector: 'app-usuarios-edit',
+  templateUrl: './usuarios-edit.component.html',
+  styleUrls: ['./usuarios-edit.component.css']
 })
-export class DepartamentosCreateComponent {
+export class UsuariosEditComponent implements OnInit{
 
   hide = true;
-
+  
   constructor( 
-    private data : DataService,
+    private data: DataService,
+    private route: ActivatedRoute,
     private snack: SnackbarService,
+    private router: Router,
     private perfilService: PerfilService,
     private headerService: HeaderService) {
     headerService.headerData = {
@@ -34,6 +37,7 @@ export class DepartamentosCreateComponent {
       home: true
     }
   }
+  
   userObj = {
     id: '',
     first_name: '',
@@ -49,6 +53,23 @@ export class DepartamentosCreateComponent {
   perfil: string = '';
   user_name: string = '';
 
+  ngOnInit(): void {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.data.getUser(String(id)).subscribe(user =>
+      {
+        this.preencher_form(user[0], id)
+      })
+  }
+
+  preencher_form(user: any, id: string)
+  {
+    this.id = id;
+    this.first_name = user.first_name;
+    this.last_name = user.last_name;
+    this.password = user.password;
+    this.perfil = user.perfil;
+  }
+
   resetForm()
   {
     this.id = '';
@@ -59,7 +80,7 @@ export class DepartamentosCreateComponent {
     this.user_name = '';
   }
 
-  addUser()
+  updateUser()
   {
     if(this.first_name == '' || this.last_name == '' || this.password == '' || this.perfil == '')
     {
@@ -67,16 +88,15 @@ export class DepartamentosCreateComponent {
     }
     else 
     {
-      this.userObj.id = '';
+      this.userObj.id = this.id;
       this.userObj.first_name = this.first_name;
       this.userObj.last_name = this.last_name;
       this.userObj.password = this.password;
       this.userObj.perfil = this.perfil;
       this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      this.data.addUser(this.userObj)
-      this.resetForm()
-      this.snack.openSnackBar('Criado com sucesso!')
+      this.data.updateUser(this.userObj, this.id)
+      this.snack.openSnackBar('Atualizado com sucesso!')
+      this.router.navigate(['/departamentos'])
     }
   }
-
 }

@@ -8,7 +8,7 @@
 :root 
 {
     --background: #eee;
-    --primaryColor: #002d44;
+    --primaryColor: #5cb1e9;
     --secondColor: #eee;
     --textColor: #1d1d1d;
     --warnColor: #e35e6b;
@@ -20,7 +20,7 @@
 :root .dark-theme
 {
     --background: #1d1d1d;
-    --primaryColor: #3254a8;
+    --primaryColor: #5cb1e9;
     --textColor: #eee;
     --secondColor: #eee;
 }

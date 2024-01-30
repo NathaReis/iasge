@@ -1,19 +1,19 @@
 import { MatDialog } from '@angular/material/dialog';
-import { User } from '../../../models/user';
+import { User } from './../../../models/user';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { DialogConfirmationComponent } from 'src/app/components/template/dialog-confirmation/dialog-confirmation.component';
 import { SnackbarService } from 'src/app/components/services/snackbar.service';
+import { DataService } from 'src/app/components/services/data.service';
 
 @Component({
-  selector: 'app-departamentos-read',
-  templateUrl: './departamentos-read.component.html',
-  styleUrls: ['./departamentos-read.component.css']
+  selector: 'app-usuarios-read',
+  templateUrl: './usuarios-read.component.html',
+  styleUrls: ['./usuarios-read.component.css']
 })
-export class DepartamentosReadComponent implements AfterViewInit, OnInit{
+export class UsuariosReadComponent implements AfterViewInit, OnInit{
 
   constructor(
     private data: DataService,

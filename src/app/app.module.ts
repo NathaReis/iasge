@@ -38,10 +38,10 @@ import { EventosComponent } from './views/eventos/eventos.component';
 import { EventosCreateComponent } from './components/pages/eventos/eventos-create/eventos-create.component';
 import { EventosReadComponent } from './components/pages/eventos/eventos-read/eventos-read.component';
 
-import { DepartamentosComponent } from './views/departamentos/departamentos.component';
-import { DepartamentosCreateComponent } from './components/pages/departamentos/departamentos-create/departamentos-create.component';
-import { DepartamentosReadComponent } from './components/pages/departamentos/departamentos-read/departamentos-read.component';
-import { DepartamentosEditComponent } from './components/pages/departamentos/departamentos-edit/departamentos-edit.component';
+import { UsuariosComponent } from './views/usuarios/usuarios.component';
+import { UsuariosReadComponent } from './components/pages/usuarios/usuarios-read/usuarios-read.component';
+import { UsuariosEditComponent } from './components/pages/usuarios/usuarios-edit/usuarios-edit.component';
+import { UsuariosCreateComponent } from './components/pages/usuarios/usuarios-create/usuarios-create.component';
 
 import { AssociadosComponent } from './views/associados/associados.component';
 import { AssociadosReadComponent } from './components/pages/associados/associados-read/associados-read.component';
@@ -79,10 +79,6 @@ import { FormEscalaComponent } from './components/template/form-escala/form-esca
     ConfigComponent,
     HeaderComponent,
     BodyComponent,
-    DepartamentosComponent,
-    DepartamentosCreateComponent,
-    DepartamentosReadComponent,
-    DepartamentosEditComponent,
     DialogConfirmationComponent,
     AssociadosComponent,
     AssociadosReadComponent,
@@ -95,6 +91,10 @@ import { FormEscalaComponent } from './components/template/form-escala/form-esca
     EventosEditComponent,
     EscalasEditComponent,
     FormEscalaComponent,
+    UsuariosComponent,
+    UsuariosReadComponent,
+    UsuariosEditComponent,
+    UsuariosCreateComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(ambiente.firebaseConfig),

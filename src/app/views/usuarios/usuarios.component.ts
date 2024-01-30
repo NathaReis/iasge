@@ -5,12 +5,11 @@ import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
 
 @Component({
-  selector: 'app-departamentos',
-  templateUrl: './departamentos.component.html',
-  styleUrls: ['./departamentos.component.css']
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css']
 })
-export class DepartamentosComponent {
-
+export class UsuariosComponent {
   constructor(
     private auth: AuthService,
     private data: DataService,

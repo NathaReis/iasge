@@ -83,4 +83,8 @@ export class HeaderComponent implements OnInit{
     const nav = document.querySelector(".nav");
     nav?.classList.toggle("active");
   }
+
+  back(): void {
+    history.back();
+  }
 }

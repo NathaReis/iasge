@@ -26,6 +26,7 @@
 {
     background: var(--primaryColor);
     padding-inline: 16px;
+    height: 10vh;
     cursor: default;
 }
 
@@ -49,6 +50,9 @@ a
 .logo
 {
     font-size: 48px;
+    color: #ffffff;
+    text-shadow: 4px 3px 4px rgba(0, 0, 0, 0.397);
+    cursor: pointer;
 }
 
 .nav-list 
@@ -63,6 +67,11 @@ a
     font-size: 18px;
     color: #fff;
     padding-block: 16px;
+}
+
+.nav-list a:active
+{
+    color: #fff34e;
 }
 
 .hamburguer
@@ -134,14 +143,33 @@ a
 
     .nav-list li:nth-child(3) a 
     {
-        transition: .5s .6s;
+        transition: .5s .5s;
     }
 
     .nav-list li:nth-child(4) a 
     {
-        transition: .5s .8s;
+        transition: .5s .6s;
+    }
+    
+    .nav-list li:nth-child(5) a 
+    {
+        transition: .5s .7s;
     }
 
+    .nav-list li:nth-child(6) a 
+    {
+        transition: .5s .8s;
+    }
+    
+    .nav-list li:nth-child(7) a 
+    {
+        transition: .5s .9s;
+    }
+
+    .nav-list li:nth-child(8) a 
+    {
+        transition: .5s 1s;
+    }
     /*ACTIVE*/
 
     .nav.active .nav-list
