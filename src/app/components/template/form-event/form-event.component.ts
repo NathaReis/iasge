@@ -50,17 +50,17 @@ export class FormEventComponent implements OnInit{
         title: 'Eventos',
         icon: 'event',
         routerLink: 'eventos'
-      },
-      perfilService.perfilData = {
-        departamentos: localStorage.getItem("departamentos") ? true : false,
-        associados: localStorage.getItem("associados") ? true : false,
-        eventos: localStorage.getItem("eventos") ? true : false,
-        type: String(localStorage.getItem("logado")),
-        all_view: localStorage.getItem("all_view") ? true : false,
-        escalas: true,
-        config: true,
-        home: true
       }
+      // perfilService.perfilData = {
+      //   departamentos: localStorage.getItem("departamentos") ? true : false,
+      //   associados: localStorage.getItem("associados") ? true : false,
+      //   eventos: localStorage.getItem("eventos") ? true : false,
+      //   type: String(localStorage.getItem("logado")),
+      //   all_view: localStorage.getItem("all_view") ? true : false,
+      //   escalas: true,
+      //   config: true,
+      //   home: true
+      // }
     }
 
   ngOnInit(): void {

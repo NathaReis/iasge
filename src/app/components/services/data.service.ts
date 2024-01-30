@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { User } from '../models/user';
+import { Usuario } from '../models/usuario';
 import { Event } from '../models/event';
 import { Escala } from '../models/escala';
 
@@ -12,54 +12,59 @@ export class DataService {
   constructor(private afs : AngularFirestore) { }
 
   //USER
-  // add user
-  addUser(user: User)
+  // add 
+  addUser(user: Usuario)
   {
-    user.id = this.afs.createId();
-    return this.afs.collection('/users').add(user);
+    return this.afs.collection('/usuario').add(user);
   }
-  // get all users
+  // get all usuario
   getAllUsers()
   {
-    return this.afs.collection('/users').snapshotChanges();
+    return this.afs.collection('/usuario').snapshotChanges();
   }
-  // get one users
+  // get one usuario
   getUser(id?: string)
   {
-    //return this.afs.doc(`/users/${id}`).get();
-    return this.afs.collection('users', ref => {
+    //return this.afs.doc(`/usuario/${id}`).get();
+    return this.afs.collection('usuario', ref => {
       return ref
       .where('id', '==', id)
     }).valueChanges();
   }
-  getUserOfNamePass(name: string, pass: string)
+  login(user_name: string, password: string)
   {
-    return this.afs.collection('users', ref => {
+    return this.afs.collection('usuario', ref => {
       return ref
-      .where('user_name', '==', name)
-      .where('password', '==', pass)
+      .where('Nome', '==', user_name.split('.')[0])
+      .where('Sobrenome', '==', user_name.split('.')[1])
+      .where('Senha', '==', password)
     }).valueChanges();
   }
-  // delete user
+  // delete 
   deleteUser(id: string)
   {
-    return this.afs.doc(`/users/${id}`).delete();
+    return this.afs.doc(`/usuario/${id}`).delete();
   }
-  // update user
-  updateUser(user: User, id: string)
+  // update 
+  updateUser(user: Usuario, id: string)
   {
-    this.afs.doc(`users/${id}`).update(user);
+    this.afs.doc(`usuario/${id}`).update(user);
   }
 
-  //PERFIL
-  // get all perfis
-  getAllPerfis()
+  //Igreja
+  getIgreja(id: string)
+  {
+    return this.afs.doc(`/igreja/${id}`).get();
+  }
+
+  //Perfil
+  getPerfil(id: string)
+  {
+    return this.afs.doc(`/perfil/${id}`).get();
+  }
+  getAllPerfil()
   {
     return this.afs.collection('/perfis').snapshotChanges();
-  }
-  getPerfil(type: string)
-  {
-    return this.afs.collection('perfis', ref => ref.where('type', '==', type)).valueChanges();
   }
 
   //EVENT

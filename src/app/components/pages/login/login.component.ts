@@ -25,17 +25,17 @@ export class LoginComponent implements OnInit {
         title: 'Login',
         icon: 'login',
         routerLink: 'login'
-      },
-      perfil.perfilData = {
-        type: '',
-        eventos: false,
-        departamentos: false,
-        associados: false,
-        all_view: false,
-        escalas: false,
-        config: false,
-        home: false
       }
+      // perfil.perfilData = {
+      //   type: '',
+      //   eventos: false,
+      //   departamentos: false,
+      //   associados: false,
+      //   all_view: false,
+      //   escalas: false,
+      //   config: false,
+      //   home: false
+      // }
     }
 
   ngOnInit(): void {

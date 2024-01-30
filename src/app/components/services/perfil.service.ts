@@ -8,14 +8,14 @@ import { Perfil } from '../models/perfil';
 export class PerfilService {
 
   _perfilData = new BehaviorSubject<Perfil>({
-    type: '',
-    eventos: false,
-    departamentos: false,
-    associados: false,
-    all_view: false,
-    escalas: false,
-    config: false,
-    home: false
+    // type: '',
+    // eventos: false,
+    // departamentos: false,
+    // associados: false,
+    // all_view: false,
+    // escalas: false,
+    // config: false,
+    // home: false
   });
 
   constructor() { }

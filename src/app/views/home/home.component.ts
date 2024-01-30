@@ -25,15 +25,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.auth_guard();
-    this.data.getPerfil(String(localStorage.getItem('logado'))).subscribe(res =>
-      {
-        const perfil = res[0];
-        this.perfilSave(perfil)
-      }, err => 
-      {
-        //Mensagem de erro
-        alert(`Erro de busca: ${err}`)
-      })
+    // this.data.getPerfil(String(localStorage.getItem('logado'))).subscribe(res =>
+    //   {
+    //     const perfil = res[0];
+    //     this.perfilSave(perfil)
+    //   }, err => 
+    //   {
+    //     //Mensagem de erro
+    //     alert(`Erro de busca: ${err}`)
+    //   })
   }
 
   perfilSave(perfil: any)
@@ -55,16 +55,16 @@ export class HomeComponent implements OnInit {
     {
       localStorage.setItem('eventos', 'true');
     }
-    this.perfil.perfilData = {
-      departamentos: localStorage.getItem("departamentos") ? true : false,
-      associados: localStorage.getItem("associados") ? true : false,
-      eventos: localStorage.getItem("eventos") ? true : false,
-      type: String(localStorage.getItem("logado")),
-      all_view: localStorage.getItem("all_view") ? true : false,
-      escalas: true,
-      config: true,
-      home: true
-    }
+    // this.perfil.perfilData = {
+    //   departamentos: localStorage.getItem("departamentos") ? true : false,
+    //   associados: localStorage.getItem("associados") ? true : false,
+    //   eventos: localStorage.getItem("eventos") ? true : false,
+    //   type: String(localStorage.getItem("logado")),
+    //   all_view: localStorage.getItem("all_view") ? true : false,
+    //   escalas: true,
+    //   config: true,
+    //   home: true
+    // }
   }
 }
 

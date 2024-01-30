@@ -75,18 +75,18 @@ export class EscalasReadComponent implements OnInit {
     ];
 
     //Options acima
-    if(this.perfilService.perfilData.type == 'associado')
-    {
-      this.isAssociado = true;
-      this.data.getUser(String(localStorage.getItem('user_id'))).subscribe((user: any) =>
-        {
-          this.preencherDeps(user[0].departamentos);
-        })
-    }
-    else 
-    {
-      this.isEditor = true;
-    }
+    // if(this.perfilService.perfilData.type == 'associado')
+    // {
+    //   this.isAssociado = true;
+    //   this.data.getUser(String(localStorage.getItem('user_id'))).subscribe((user: any) =>
+    //     {
+    //       this.preencherDeps(user[0].departamentos);
+    //     })
+    // }
+    // else 
+    // {
+    //   this.isEditor = true;
+    // }
   }
 
   preencherDeps(departamentos: string)
@@ -139,11 +139,11 @@ export class EscalasReadComponent implements OnInit {
             return data;
           })
 
-        if(!this.perfilService.perfilData.all_view)
-        {
-          this.escalasList = this.escalasList
-          .filter(this.myEscalas)          
-        }
+        // if(!this.perfilService.perfilData.all_view)
+        // {
+        //   this.escalasList = this.escalasList
+        //   .filter(this.myEscalas)          
+        // }
         this.popularEscalas(this.escalasList);
         this.updateCalendarOptions();
       }, err => 

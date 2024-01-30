@@ -81,14 +81,14 @@ export class EventosReadComponent implements OnInit {
         this.eventsListBack = this.eventsList
         .filter(this.otherEvents)
         .filter(this.isEventPublic);
-        if(!this.perfilService.perfilData.all_view)
-        {
-          this.eventsList = this.eventsList.filter(this.myEvents);
-        }
-        else 
-        {
-          this.eventsList = this.eventsList.filter(ev => ev.user != String(localStorage.getItem('usermask_id')) && ev.event_type == 'public' ||  ev.user == String(localStorage.getItem('usermask_id')));
-        }
+        // if(!this.perfilService.perfilData.all_view)
+        // {
+        //   this.eventsList = this.eventsList.filter(this.myEvents);
+        // }
+        // else 
+        // {
+        //   this.eventsList = this.eventsList.filter(ev => ev.user != String(localStorage.getItem('usermask_id')) && ev.event_type == 'public' ||  ev.user == String(localStorage.getItem('usermask_id')));
+        // }
         this.popularEvents(this.eventsList); //Atualiza a lista
         this.popularEventsAnuais(this.eventsListAnuais); //Atualiza a lista
         this.popularEventsBack(this.eventsListBack); //Atualiza a lista

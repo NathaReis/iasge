@@ -22,17 +22,17 @@ export class AssociadosCreateComponent {
       title: 'Associados',
       icon: 'people',
       routerLink: 'associados'
-    },
-    perfilService.perfilData = {
-      departamentos: localStorage.getItem("departamentos") ? true : false,
-      associados: localStorage.getItem("associados") ? true : false,
-      eventos: localStorage.getItem("eventos") ? true : false,
-      type: String(localStorage.getItem("logado")),
-      all_view: localStorage.getItem("all_view") ? true : false,
-      escalas: true,
-      config: true,
-      home: true
     }
+    // perfilService.perfilData = {
+    //   // departamentos: localStorage.getItem("departamentos") ? true : false,
+    //   associados: localStorage.getItem("associados") ? true : false,
+    //   eventos: localStorage.getItem("eventos") ? true : false,
+    //   type: String(localStorage.getItem("logado")),
+    //   all_view: localStorage.getItem("all_view") ? true : false,
+    //   escalas: true,
+    //   config: true,
+    //   home: true
+    // }
   }
   userObj = {
     id: '',
@@ -59,21 +59,21 @@ export class AssociadosCreateComponent {
 
   addUser()
   {
-    if(this.first_name == '' || this.last_name == '' || this.password == '')
-    {
-      this.snack.openSnackBar('Preencha todos os campos', 2000);
-    }
-    else 
-    {
-      this.userObj.id = '';
-      this.userObj.first_name = this.first_name;
-      this.userObj.last_name = this.last_name;
-      this.userObj.password = this.password;
-      this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      this.userObj.departamentos = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},false`,
-      this.data.addUser(this.userObj)
-      this.resetForm()
-      this.snack.openSnackBar('Criado com sucesso!')
-    }
+    // if(this.first_name == '' || this.last_name == '' || this.password == '')
+    // {
+    //   this.snack.openSnackBar('Preencha todos os campos', 2000);
+    // }
+    // else 
+    // {
+    //   this.userObj.id = '';
+    //   this.userObj.first_name = this.first_name;
+    //   this.userObj.last_name = this.last_name;
+    //   this.userObj.password = this.password;
+    //   this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
+    //   this.userObj.departamentos = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},false`,
+    //   this.data.addUser(this.userObj)
+    //   this.resetForm()
+    //   this.snack.openSnackBar('Criado com sucesso!')
+    // }
   }
 }

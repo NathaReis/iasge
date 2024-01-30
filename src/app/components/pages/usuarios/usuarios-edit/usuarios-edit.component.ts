@@ -22,20 +22,20 @@ export class UsuariosEditComponent implements OnInit{
     private perfilService: PerfilService,
     private headerService: HeaderService) {
     headerService.headerData = {
-      title: 'Departamentos',
+      title: 'Usuários',
       icon: 'house',
-      routerLink: 'departamentos'
-    },
-    perfilService.perfilData = {
-      departamentos: localStorage.getItem("departamentos") ? true : false,
-      associados: localStorage.getItem("associados") ? true : false,
-      eventos: localStorage.getItem("eventos") ? true : false,
-      type: String(localStorage.getItem("logado")),
-      all_view: localStorage.getItem("all_view") ? true : false,
-      escalas: true,
-      config: true,
-      home: true
+      routerLink: 'usuarios'
     }
+    // perfilService.perfilData = {
+    //   departamentos: localStorage.getItem("departamentos") ? true : false,
+    //   associados: localStorage.getItem("associados") ? true : false,
+    //   eventos: localStorage.getItem("eventos") ? true : false,
+    //   type: String(localStorage.getItem("logado")),
+    //   all_view: localStorage.getItem("all_view") ? true : false,
+    //   escalas: true,
+    //   config: true,
+    //   home: true
+    // }
   }
   
   userObj = {
@@ -94,7 +94,7 @@ export class UsuariosEditComponent implements OnInit{
       this.userObj.password = this.password;
       this.userObj.perfil = this.perfil;
       this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      this.data.updateUser(this.userObj, this.id)
+      // this.data.updateUser(this.userObj, this.id)
       this.snack.openSnackBar('Atualizado com sucesso!')
       this.router.navigate(['/departamentos'])
     }

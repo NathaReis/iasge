@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
-import { User } from './../../../models/user';
+import { Usuario } from '../../../models/usuario';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,9 +21,9 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
     private dialog: MatDialog,
     private headerService: HeaderService) {
     headerService.headerData = {
-      title: 'Departamentos',
+      title: 'Usuários',
       icon: 'house',
-      routerLink: 'departamentos'
+      routerLink: 'usuarios'
     }
   }
 
@@ -34,10 +34,10 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  dataSource = new MatTableDataSource<User>();
+  dataSource = new MatTableDataSource<Usuario>();
 
   //USER LIST
-  usersList: User[] = [];
+  usersList: Usuario[] = [];
   ngOnInit(): void {
     this.getAllUsers()
   }
@@ -53,14 +53,14 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
             const data = e.payload.doc.data();
             return data;
           })
-        const noass = this.usersList.filter(user => user.perfil != 'associado');
-        const admins = noass.filter(user => user.perfil == 'admin');
-        const gerentes = noass.filter(user => user.perfil == 'gerente');
-        const diretores = noass.filter(user => user.perfil == 'diretor');
-        const ass = this.usersList.filter(user => user.perfil == 'associado');
-        this.usersList = admins.concat(gerentes.concat(diretores.concat(ass)));//Ordernar a lista em Admin/Gerente/Diretor/Associado cima para baixo
+        // const noass = this.usersList.filter(user => user.perfil != 'associado');
+        // const admins = noass.filter(user => user.perfil == 'admin');
+        // const gerentes = noass.filter(user => user.perfil == 'gerente');
+        // const diretores = noass.filter(user => user.perfil == 'diretor');
+        // const ass = this.usersList.filter(user => user.perfil == 'associado');
+        // this.usersList = admins.concat(gerentes.concat(diretores.concat(ass)));//Ordernar a lista em Admin/Gerente/Diretor/Associado cima para baixo
         //Passa a lista para o data usado na table
-        this.dataSource = new MatTableDataSource<User>(this.usersList);
+        this.dataSource = new MatTableDataSource<Usuario>(this.usersList);
         setTimeout(() => {this.validarView();}, 10)
       }, err => 
       {

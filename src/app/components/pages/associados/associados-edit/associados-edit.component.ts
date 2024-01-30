@@ -25,17 +25,17 @@ export class AssociadosEditComponent implements OnInit{
       title: 'Associados',
       icon: 'people',
       routerLink: 'associados'
-    },
-    perfilService.perfilData = {
-      departamentos: localStorage.getItem("departamentos") ? true : false,
-      associados: localStorage.getItem("associados") ? true : false,
-      eventos: localStorage.getItem("eventos") ? true : false,
-      type: String(localStorage.getItem("logado")),
-      all_view: localStorage.getItem("all_view") ? true : false,
-      escalas: true,
-      config: true,
-      home: true
     }
+    // perfilService.perfilData = {
+    //   departamentos: localStorage.getItem("departamentos") ? true : false,
+    //   associados: localStorage.getItem("associados") ? true : false,
+    //   eventos: localStorage.getItem("eventos") ? true : false,
+    //   type: String(localStorage.getItem("logado")),
+    //   all_view: localStorage.getItem("all_view") ? true : false,
+    //   escalas: true,
+    //   config: true,
+    //   home: true
+    // }
   }
   
   userObj = {
@@ -105,51 +105,51 @@ export class AssociadosEditComponent implements OnInit{
 
   updateUser()
   {
-    if(this.departamentos)
-    {
-      let isUltimo = this.departamentos.replace(`${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},`,'').length <= 5 ? true : false;
-      if(isUltimo)
-      {
-        let perfil = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},${this.editor}`;
-        this.departamentos = perfil;
-      }
-      else 
-      {
-        let newList = '';
-        let deps = this.departamentos.split('/')
-        deps.forEach((dep: string) =>
-          {
-            let id = dep.split(',')[0];
-            if(id == localStorage.getItem('usermask_id'))
-            {
-              let newDep = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},${this.editor}`;
-              newList.length <= 0 ? newList = newDep : newList += `/${newDep}`;
-            }
-            else 
-            {
-              newList.length <= 0 ? newList = dep : newList += `/${dep}`;
-            }
-          })
+    // if(this.departamentos)
+    // {
+    //   let isUltimo = this.departamentos.replace(`${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},`,'').length <= 5 ? true : false;
+    //   if(isUltimo)
+    //   {
+    //     let perfil = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},${this.editor}`;
+    //     this.departamentos = perfil;
+    //   }
+    //   else 
+    //   {
+    //     let newList = '';
+    //     let deps = this.departamentos.split('/')
+    //     deps.forEach((dep: string) =>
+    //       {
+    //         let id = dep.split(',')[0];
+    //         if(id == localStorage.getItem('usermask_id'))
+    //         {
+    //           let newDep = `${localStorage.getItem('usermask_id')},${localStorage.getItem('usermask_name')},${this.editor}`;
+    //           newList.length <= 0 ? newList = newDep : newList += `/${newDep}`;
+    //         }
+    //         else 
+    //         {
+    //           newList.length <= 0 ? newList = dep : newList += `/${dep}`;
+    //         }
+    //       })
 
-          this.departamentos = newList;
-      }
-    }
-    if(this.first_name == '' || this.last_name == '')
-    {
-      this.snack.openSnackBar('Preencha todos os campos', 2000);
-    }
-    else 
-    {
-      this.userObj.id = this.id;
-      this.userObj.first_name = this.first_name;
-      this.userObj.last_name = this.last_name;
-      this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      this.userObj.departamentos = this.departamentos;
-      this.userObj.perfil = this.perfil;
-      this.userObj.password = this.password;
-      this.data.updateUser(this.userObj, this.id)
-      this.snack.openSnackBar('Atualizado com sucesso!')
-      this.router.navigate(['/associados'])
-    }
+    //       this.departamentos = newList;
+    //   }
+    // }
+    // if(this.first_name == '' || this.last_name == '')
+    // {
+    //   this.snack.openSnackBar('Preencha todos os campos', 2000);
+    // }
+    // else 
+    // {
+    //   this.userObj.id = this.id;
+    //   this.userObj.first_name = this.first_name;
+    //   this.userObj.last_name = this.last_name;
+    //   this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
+    //   this.userObj.departamentos = this.departamentos;
+    //   this.userObj.perfil = this.perfil;
+    //   this.userObj.password = this.password;
+    //   this.data.updateUser(this.userObj, this.id)
+    //   this.snack.openSnackBar('Atualizado com sucesso!')
+    //   this.router.navigate(['/associados'])
+    // }
   }
 }

@@ -18,20 +18,20 @@ export class UsuariosCreateComponent {
     private perfilService: PerfilService,
     private headerService: HeaderService) {
     headerService.headerData = {
-      title: 'Departamentos',
+      title: 'Usuários',
       icon: 'house',
-      routerLink: 'departamentos'
-    },
-    perfilService.perfilData = {
-      departamentos: localStorage.getItem("departamentos") ? true : false,
-      associados: localStorage.getItem("associados") ? true : false,
-      eventos: localStorage.getItem("eventos") ? true : false,
-      type: String(localStorage.getItem("logado")),
-      all_view: localStorage.getItem("all_view") ? true : false,
-      escalas: true,
-      config: true,
-      home: true
+      routerLink: 'usuarios'
     }
+    // perfilService.perfilData = {
+    //   departamentos: localStorage.getItem("departamentos") ? true : false,
+    //   associados: localStorage.getItem("associados") ? true : false,
+    //   eventos: localStorage.getItem("eventos") ? true : false,
+    //   type: String(localStorage.getItem("logado")),
+    //   all_view: localStorage.getItem("all_view") ? true : false,
+    //   escalas: true,
+    //   config: true,
+    //   home: true
+    // }
   }
   userObj = {
     id: '',
@@ -72,7 +72,7 @@ export class UsuariosCreateComponent {
       this.userObj.password = this.password;
       this.userObj.perfil = this.perfil;
       this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      this.data.addUser(this.userObj)
+      // this.data.addUser(this.userObj)
       this.resetForm()
       this.snack.openSnackBar('Criado com sucesso!')
     }

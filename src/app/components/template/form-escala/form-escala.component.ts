@@ -52,17 +52,17 @@ export class FormEscalaComponent implements OnInit{
         title: 'Escalas',
         icon: 'dashboard',
         routerLink: 'escalas'
-      },
-      perfilService.perfilData = {
-        departamentos: localStorage.getItem("departamentos") ? true : false,
-        associados: localStorage.getItem("associados") ? true : false,
-        eventos: localStorage.getItem("eventos") ? true : false,
-        type: String(localStorage.getItem("logado")),
-        all_view: localStorage.getItem("all_view") ? true : false,
-        escalas: true,
-        config: true,
-        home: true
       }
+      // perfilService.perfilData = {
+      //   departamentos: localStorage.getItem("departamentos") ? true : false,
+      //   associados: localStorage.getItem("associados") ? true : false,
+      //   eventos: localStorage.getItem("eventos") ? true : false,
+      //   type: String(localStorage.getItem("logado")),
+      //   all_view: localStorage.getItem("all_view") ? true : false,
+      //   escalas: true,
+      //   config: true,
+      //   home: true
+      // }
     }
 
   ngOnInit(): void {
@@ -141,10 +141,10 @@ export class FormEscalaComponent implements OnInit{
         .filter(this.yearEvents)
         .filter(this.minDateEvents)
         .filter(this.publicEvents);
-        if(!this.perfilService.perfilData.all_view)
-        {
-          this.eventsList = this.eventsList.filter(this.myEvents);
-        }
+        // if(!this.perfilService.perfilData.all_view)
+        // {
+        //   this.eventsList = this.eventsList.filter(this.myEvents);
+        // }
         this.popularEvents(this.eventsList); //Atualiza a lista
       }, err => 
       {

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Dialog } from '../../models/dialog';
 import { DataService } from '../../services/data.service';
 import { SnackbarService } from '../../services/snackbar.service';
-import { User } from '../../models/user';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-dialog-confirmation',
@@ -39,15 +39,15 @@ export class DialogConfirmationComponent implements OnInit{
   }
 
   //Password
-  user: User = {
-    id: '',
-    user_name: '',
-    first_name: '',
-    last_name: '',
-    password: '',
-    perfil: '',
-    departamentos: '',  
-  };
+  // user: User = {
+  //   // id: '',
+  //   // user_name: '',
+  //   // first_name: '',
+  //   last_name: '',
+  //   password: '',
+  //   perfil: '',
+  //   departamentos: '',  
+  // };
   user_name: string = String(localStorage.getItem("usermask_name"));
   passwordAtual: string = '';
   password: string = '';
@@ -64,7 +64,7 @@ export class DialogConfirmationComponent implements OnInit{
         if(res)
         {
           this.passwordAtual = res.data().password;
-          this.user = res.data();
+          // this.user = res.data();
         }
         else 
         {
@@ -79,8 +79,8 @@ export class DialogConfirmationComponent implements OnInit{
     {
       if(this.newPassword == this.confirmPassword)
       {
-        this.user.password = this.newPassword;
-        this.dataS.updateUser(this.user, String(localStorage.getItem("usermask_id")))
+        // this.user.password = this.newPassword;
+        // this.dataS.updateUser(this.user, String(localStorage.getItem("usermask_id")))
         this.onConfirm(true);
       }
       else 
