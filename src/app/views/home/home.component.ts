@@ -25,12 +25,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.auth_guard();
-
-    const token = localStorage.getItem('token');
-    const dados = token?.split('.') ? token.split('.') : '';
-    const perfil = 1;
-    const igreja = 2;
-    this.perfil.getPerfilSistema(dados[perfil], dados[igreja]);
     // this.data.getPerfil(String(localStorage.getItem('logado'))).subscribe(res =>
     //   {
     //     const perfil = res[0];

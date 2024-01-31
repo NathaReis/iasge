@@ -54,10 +54,20 @@ export class DataService {
     return this.afs.doc(`/perfil/${id}`).get();
   }
 
+  //Sistema
+  getSistema(id: string)
+  {
+    return this.afs.doc(`/sistemas/${id}`).get();
+  }
+
   //PerfilSistemas
   getPerfilSistemas(perfil: string, igreja: string)
   {
-    return this.afs.collection('/perfiligrejasistemas').snapshotChanges();
+    return this.afs.collection('perfiligrejasistemas', ref => {
+      return ref
+      .where('Perfil', '==', perfil)
+      .where('Igreja', '==', igreja)
+    }).valueChanges();
   }
 
   //EVENT

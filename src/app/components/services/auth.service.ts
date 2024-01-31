@@ -26,15 +26,6 @@ export class AuthService {
     const regex = /^[a-zA-Z]+[.][a-zA-Z]+$/;
     if(user_name.match(regex))
     {
-      // this.data.login(user_name, password).subscribe(res =>
-      //   {
-      //     //Mapeia o resultado
-      //     let usersList = res.map((e: any) =>
-      //       {
-      //         const data = e.payload.doc.data();
-      //         return data;
-      //       })
-      //   }
       this.data.getAllUsers().subscribe(res =>
         {
           let usersList = res.map((e: any) =>

@@ -10,12 +10,6 @@ import { BodyService } from '../../services/body.service';
 })
 export class HeaderComponent implements OnInit{
 
-  escalas = false;
-  eventos = false;
-  usuarios = false;
-  igrejas = false;
-  config = false;
-
   constructor(
     private headerService: HeaderService,
     private perfilService: PerfilService,
@@ -34,31 +28,27 @@ export class HeaderComponent implements OnInit{
     return this.headerService.headerData.routerLink;
   }
 
-  // //Perfil
-  // get eventos(): boolean
-  // {
-  //   return this.perfilService.perfilData.eventos;
-  // }
-  // get associados(): boolean
-  // {
-  //   return this.perfilService.perfilData.associados;
-  // }
-  // get departamentos(): boolean
-  // {
-  //   return this.perfilService.perfilData.departamentos;
-  // }
-  // get config(): boolean
-  // {
-  //   return this.perfilService.perfilData.config;
-  // }
-  // get escalas(): boolean
-  // {
-  //   return this.perfilService.perfilData.escalas;
-  // }
-  // get home(): boolean
-  // {
-  //   return this.perfilService.perfilData.home;
-  // }
+  //Perfil
+  get eventos(): boolean
+  {
+    return this.perfilService.perfilData.eventos;
+  }
+  get usuarios(): boolean
+  {
+    return this.perfilService.perfilData.usuarios;
+  }
+  get config(): boolean
+  {
+    return this.perfilService.perfilData.config;
+  }
+  get escalas(): boolean
+  {
+    return this.perfilService.perfilData.escalas;
+  }
+  get igrejas(): boolean
+  {
+    return this.perfilService.perfilData.igrejas;
+  }
 
   //Body
   get theme(): boolean 
@@ -75,6 +65,11 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+    const perfil = 1;
+    const igreja = 2;
+    this.perfilService.getPerfilSistema(dados[perfil], dados[igreja]);
     if(localStorage.getItem("theme") != 'dark-theme')
     {
       this.isTheme('');
