@@ -49,9 +49,12 @@ export class DataService {
   }
 
   //Perfil
-  getPerfil(id: string)
+  getPerfil(sistema: string)
   {
-    return this.afs.doc(`/perfil/${id}`).get();
+    return this.afs.collection('sistemas', ref => {
+      return ref
+      .where('Sistema', '==', sistema)
+    }).valueChanges();  
   }
 
   //Sistema

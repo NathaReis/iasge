@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Pisistemas } from 'src/app/components/models/pisistemas';
 import { AuthService } from 'src/app/components/services/auth.service';
 import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
+import { SnackbarService } from 'src/app/components/services/snackbar.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private data: DataService,
+    private snack: SnackbarService,
     private perfil: PerfilService,
     private headerService: HeaderService) {
       headerService.headerData = {
@@ -24,47 +27,52 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+
     this.auth.auth_guard();
-    // this.data.getPerfil(String(localStorage.getItem('logado'))).subscribe(res =>
-    //   {
-    //     const perfil = res[0];
-    //     this.perfilSave(perfil)
-    //   }, err => 
-    //   {
-    //     //Mensagem de erro
-    //     alert(`Erro de busca: ${err}`)
-    //   })
+    this.data.getPerfilSistemas(dados[1],dados[2]).subscribe((res: any) =>
+      {
+        this.perfilSave(res[0]);
+      }, err => 
+      {
+        //Mensagem de erro
+        this.snack.openSnackBar(`Erro de busca: ${err}`);
+      })
   }
 
-  perfilSave(perfil: any)
+  perfilSave(dados: Pisistemas)
   {
-    let all_view = perfil.all_view ? true : false;
-    if(all_view)
-    {
-      localStorage.setItem('all_view', 'true');
+    dados.Sistemas.forEach((element: any) =>
+      {
+        console.log(element.sistema)
+        this.data.getPerfil(element.sistema).subscribe((res: any) =>
+        {
+          if(res[0].Ativo)
+          {
+            if(localStorage.getItem('sis'))
+            {
+              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + element.sistema);
+            }
+            else 
+            {
+              localStorage.setItem('sis', element.sistema);
+            }
+          }
+        })
+      })
+
+    const sis = localStorage.getItem('sis')?.split('.');
+
+    this.perfil.perfilData = {
+      eventos: sis?.includes('Evento') ? true : false,
+      escalas: sis?.includes('Escala') ? true : false,
+      usuarios: sis?.includes('Usuários') ? true : false,
+      igrejas: sis?.includes('Igreja') ? true : false,
+      config: sis?.includes('Configurações') ? true : false,
+      perfil: sis?.includes('Perfil') ? true : false,
+      perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
     }
-    if(perfil.departamentos)
-    {
-      localStorage.setItem('departamentos', 'true');
-    }
-    if(perfil.associados)
-    {
-      localStorage.setItem('associados', 'true');
-    }
-    if(perfil.eventos)
-    {
-      localStorage.setItem('eventos', 'true');
-    }
-    // this.perfil.perfilData = {
-    //   departamentos: localStorage.getItem("departamentos") ? true : false,
-    //   associados: localStorage.getItem("associados") ? true : false,
-    //   eventos: localStorage.getItem("eventos") ? true : false,
-    //   type: String(localStorage.getItem("logado")),
-    //   all_view: localStorage.getItem("all_view") ? true : false,
-    //   escalas: true,
-    //   config: true,
-    //   home: true
-    // }
   }
 }
 

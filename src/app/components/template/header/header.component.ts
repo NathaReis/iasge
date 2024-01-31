@@ -65,11 +65,6 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    const dados = token?.split('.') ? token.split('.') : '';
-    const perfil = 1;
-    const igreja = 2;
-    this.perfilService.getPerfilSistema(dados[perfil], dados[igreja]);
     if(localStorage.getItem("theme") != 'dark-theme')
     {
       this.isTheme('');
