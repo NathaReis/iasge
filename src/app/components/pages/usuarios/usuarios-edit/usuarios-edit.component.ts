@@ -110,7 +110,7 @@ export class UsuariosEditComponent implements OnInit{
       this.userObj.Igreja = dados[2];
       this.userObj.CreatedAt = `${new Date()}`;
       this.userObj.UpdatedAt = `${new Date()}`;
-      this.userObj.DeletedAt = '';
+      this.userObj.DeletedAt = this.DeletedAt;
       this.data.updateUser(this.userObj, this.id)
       this.snack.openSnackBar('Atualizado com sucesso!')
       this.router.navigate(['/usuarios'])

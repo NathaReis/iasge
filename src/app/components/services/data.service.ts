@@ -41,14 +41,14 @@ export class DataService {
     return this.afs.collection('/usuario').add(user);
   }
   // delete 
-  deleteUser(id: string)
+  deleteUser(user: Usuario, id: string)
   {
-    return this.afs.doc(`/usuario/${id}`).delete();
+    return this.afs.doc(`/usuario/${id}`).update(user);
   }
   // update 
   updateUser(user: Usuario, id: string)
   {
-    this.afs.doc(`usuario/${id}`).update(user);
+    return this.afs.doc(`/usuario/${id}`).update(user);
   }
 
   //Perfil

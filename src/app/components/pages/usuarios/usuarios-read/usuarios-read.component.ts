@@ -57,7 +57,7 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
             data.id = e.payload.doc.id;
             return data;
           })
-        this.usersList = this.usersList.filter(user => user.Igreja == dados[2]);
+        this.usersList = this.usersList.filter(user => user.Igreja == dados[2] && !user.DeletedAt); //Da minha Igreja e Não Excluido
         const comunicador = this.usersList.filter(user => user.Perfil == 'ZUI4ZeBuafPlyYRKQIqV');
         const diretor = this.usersList.filter(user => user.Perfil == '7m3EhRYDiAIK7IuF2Ba5');
         const associado = this.usersList.filter(user => user.Perfil == 'aBT94LdeklllCbeSKDrg');
@@ -71,7 +71,33 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
       })
   }
 
-  deleteUser(id: string, name: string = '')
+  delete(usuario: Usuario, id: string)
+  {
+    usuario.DeletedAt = `${new Date()}`;
+    this.data.deleteUser(usuario, id).finally(() => {
+      location.reload();
+    })
+  }
+
+  buscarUser(id: string)
+  {
+    let usuario: any;
+    this.data.getAllUsers().subscribe(res =>
+      {
+        //Mapeia o resultado
+        usuario = res.map((e: any) =>
+        {
+          const data = e.payload.doc.data();
+          data.id = e.payload.doc.id;
+          return data;
+        })
+
+        usuario = usuario.filter((user: any) => user.id == id);
+        this.delete(usuario[0], id);
+      })
+  }
+
+  deleteUser(id: string, name: string)
   {
     const dialogRef = this.dialog.open(DialogConfirmationComponent, {
       data: {title: `Deseja excluir ${name}?`, confirm: true},
@@ -80,20 +106,7 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if(result)
       {
-        this.data.getAllUsers().subscribe(res =>
-          {
-            //Mapeia o resultado
-            let usuario: any = res.map((e: any) =>
-            {
-              const data = e.payload.doc.data();
-              data.id = e.payload.doc.id;
-              return data;
-            })
-            .filter(user => user.id == id);
-            usuario.UpdatedAt = `${new Date()}`;
-
-            this.data.deleteUser(id);
-          })
+        this.buscarUser(id);
       }
     });
   }
