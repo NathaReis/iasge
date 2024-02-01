@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../services/header.service';
 import { PerfilService } from '../../services/perfil.service';
 import { BodyService } from '../../services/body.service';
+import { DataService } from '../../services/data.service';
+import { Pisistemas } from '../../models/pisistemas';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ export class HeaderComponent implements OnInit{
   constructor(
     private headerService: HeaderService,
     private perfilService: PerfilService,
+    private dataService: DataService,
     private bodyService: BodyService) {}
 
   get title(): string
@@ -65,6 +68,21 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+
+    if(token)
+    {
+      this.dataService.getPerfilSistemas(dados[1],dados[2]).subscribe((res: any) =>
+      {
+        this.perfilSave(res[0]);
+      }, err => 
+      {
+        //Mensagem de erro
+        console.log(`Erro de busca: ${err}`);
+      })
+    }
+
     if(localStorage.getItem("theme") != 'dark-theme')
     {
       this.isTheme('');
@@ -72,6 +90,40 @@ export class HeaderComponent implements OnInit{
     else 
     {
       this.isTheme('dark-theme');
+    }
+  }
+
+  perfilSave(dados: Pisistemas)
+  {
+    dados.Sistemas.forEach((element: any) =>
+      {
+        console.log(element.sistema)
+        this.dataService.getPerfil(element.sistema).subscribe((res: any) =>
+        {
+          if(res[0].Ativo)
+          {
+            if(localStorage.getItem('sis'))
+            {
+              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + element.sistema);
+            }
+            else 
+            {
+              localStorage.setItem('sis', element.sistema);
+            }
+          }
+        })
+      })
+
+    const sis = localStorage.getItem('sis')?.split('.');
+
+    this.perfilService.perfilData = {
+      eventos: sis?.includes('Evento') ? true : false,
+      escalas: sis?.includes('Escala') ? true : false,
+      usuarios: sis?.includes('Usuários') ? true : false,
+      igrejas: sis?.includes('Igreja') ? true : false,
+      config: sis?.includes('Configurações') ? true : false,
+      perfil: sis?.includes('Perfil') ? true : false,
+      perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
     }
   }
 
