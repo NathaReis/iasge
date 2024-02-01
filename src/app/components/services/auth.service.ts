@@ -76,18 +76,18 @@ export class AuthService {
   {
     let token = '';
 
-    //IdUser
+    //IdUser 0
     token = `${dados[0]}.`;
 
-    //IdPerfil
+    //IdPerfil 1
     token += `${dados[1]}.`
 
-    //IdIgreja
+    //IdIgreja 2
     token += `${dados[2]}.`;
 
 
-    //IdMasck
-    token += `${dados[0]}`
+    // //IdMasck 3
+    // token += `${dados[0]}`
     
     
 

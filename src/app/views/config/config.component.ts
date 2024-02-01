@@ -13,7 +13,7 @@ import { DialogConfirmationComponent } from 'src/app/components/template/dialog-
 })
 export class ConfigComponent implements OnInit{
 
-  theme: string = 'Claro';
+  theme: boolean = true;
 
   constructor(
     private auth : AuthService,
@@ -74,5 +74,6 @@ export class ConfigComponent implements OnInit{
     this.bodyService.appTheme = {
       theme: type
     };
+    this.theme = type == 'dark-theme' ? true : false;
   }
 }

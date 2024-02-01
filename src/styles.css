@@ -7,10 +7,10 @@
 
 :root 
 {
-    --background: #eee;
+    --background: #ffffff;
     --primaryColor: #5cb1e9;
     --secondColor: #eee;
-    --textColor: #1d1d1d;
+    --textColor: #272727;
     --warnColor: #e35e6b;
     --neutroColor: #afff79;
     --grayColor: #333;
@@ -19,10 +19,8 @@
 
 :root .dark-theme
 {
-    --background: #1d1d1d;
-    --primaryColor: #5cb1e9;
-    --textColor: #eee;
-    --secondColor: #eee;
+    --background: #272727;
+    --textColor: #ffffff;
 }
 
 /*PAGES*/
@@ -108,7 +106,8 @@ mat-icon.delete
 mat-icon.edit
 {
     cursor: pointer;
-    color: var(--neutroColor);
+    /* color: var(--neutroColor); */
+    color: #000;
 }
 mat-icon.view
 {

@@ -15,14 +15,23 @@ export class DataService {
   // PESQUISA
   getAllUsers()
   {
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+
     return this.afs.collection('/usuario').snapshotChanges();
+    // MAIS VIÁVEL 
+    // return this.afs.collection('sistemas', ref => {
+    //   return ref
+    //   .where('Igreja', '==', dados[2])
+    // }).valueChanges();  
   }
   // get one usuario
   getUser(id?: string)
   {
+    // return this.afs.doc(`/igreja/${id}`).get();
     return this.afs.collection('usuario', ref => {
       return ref
-      .where('id', '==', id)
+      .where('Uid', '==', id)
     }).valueChanges();
   }
   // FUNÇÕES
@@ -42,12 +51,6 @@ export class DataService {
     this.afs.doc(`usuario/${id}`).update(user);
   }
 
-  //Igreja
-  getIgreja(id: string)
-  {
-    return this.afs.doc(`/igreja/${id}`).get();
-  }
-
   //Perfil
   getPerfil(sistema: string)
   {
@@ -55,12 +58,6 @@ export class DataService {
       return ref
       .where('Sistema', '==', sistema)
     }).valueChanges();  
-  }
-
-  //Sistema
-  getSistema(id: string)
-  {
-    return this.afs.doc(`/sistemas/${id}`).get();
   }
 
   //PerfilSistemas

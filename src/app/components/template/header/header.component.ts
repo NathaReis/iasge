@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit{
       {
         //Mensagem de erro
         console.log(`Erro de busca: ${err}`);
-      })
+      })//Pesquisa do sistema usando perfil/igreja
     }
 
     if(localStorage.getItem("theme") != 'dark-theme')

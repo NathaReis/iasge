@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from 'src/app/components/models/usuario';
 import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
@@ -27,65 +28,92 @@ export class UsuariosEditComponent implements OnInit{
     }
   }
   
-  userObj = {
-    id: '',
-    first_name: '',
-    last_name: '',
-    password: '',
-    perfil: '',
-    user_name: '',
+  userObj: Usuario = {
+    Nome: '',
+    Sobrenome: '',
+    Senha: 'igest',
+    Perfil: '',
+    Igreja: '',
+    CreatedAt: '',
+    UpdatedAt: '',
+    DeletedAt: '',
   }
+  Nome: string = '';
+  Sobrenome: string = '';
+  Senha: string = 'igest';
+  Perfil: string = '';
+  Igreja: string = '';
+  CreatedAt: string = '';
+  UpdatedAt: string = '';
+  DeletedAt: string = '';
+
   id: string = '';
-  first_name: string = '';
-  last_name: string = '';
-  password: string = '';
-  perfil: string = '';
-  user_name: string = '';
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.data.getUser(String(id)).subscribe(user =>
+    this.data.getAllUsers().subscribe(res =>
       {
-        this.preencher_form(user[0], id)
+        //Mapeia o resultado
+        let usuario = res.map((e: any) =>
+        {
+          const data = e.payload.doc.data();
+          data.id = e.payload.doc.id;
+          return data;
+        })
+        .filter(user => user.id == id);
+
+        this.preencher_form(usuario[0], id)
       })
+
   }
 
-  preencher_form(user: any, id: string)
+  preencher_form(user: Usuario, id: string)
   {
+    this.Nome = user.Nome;
+    this.Sobrenome = user.Sobrenome;
+    this.Senha = user.Senha;
+    this.Perfil = user.Perfil;
+    this.Igreja = user.Igreja;
+    this.CreatedAt = user.CreatedAt;
+    this.UpdatedAt = user.UpdatedAt;
+    this.DeletedAt = user.DeletedAt;
     this.id = id;
-    this.first_name = user.first_name;
-    this.last_name = user.last_name;
-    this.password = user.password;
-    this.perfil = user.perfil;
   }
 
   resetForm()
   {
-    this.id = '';
-    this.first_name = '';
-    this.last_name = '';
-    this.password = '';
-    this.perfil = '';
-    this.user_name = '';
+    this.Nome = '';
+    this.Sobrenome = '';
+    this.Perfil = '';
+    this.Igreja = '';
+    this.CreatedAt = '';
+    this.UpdatedAt = '';
+    this.DeletedAt = '';
   }
 
   updateUser()
   {
-    if(this.first_name == '' || this.last_name == '' || this.password == '' || this.perfil == '')
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+
+    if(this.Nome == '' || this.Sobrenome == '' || this.Senha == '' || this.Perfil == '')
     {
       this.snack.openSnackBar('Preencha todos os campos', 2000);
     }
     else 
     {
-      this.userObj.id = this.id;
-      this.userObj.first_name = this.first_name;
-      this.userObj.last_name = this.last_name;
-      this.userObj.password = this.password;
-      this.userObj.perfil = this.perfil;
-      this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      // this.data.updateUser(this.userObj, this.id)
+      this.userObj.Nome = this.Nome;
+      this.userObj.Sobrenome = this.Sobrenome;
+      this.userObj.Senha = this.Senha;
+      this.userObj.Perfil = this.Perfil;
+
+      this.userObj.Igreja = dados[2];
+      this.userObj.CreatedAt = `${new Date()}`;
+      this.userObj.UpdatedAt = `${new Date()}`;
+      this.userObj.DeletedAt = '';
+      this.data.updateUser(this.userObj, this.id)
       this.snack.openSnackBar('Atualizado com sucesso!')
-      this.router.navigate(['/departamentos'])
+      this.router.navigate(['/usuarios'])
     }
   }
 }

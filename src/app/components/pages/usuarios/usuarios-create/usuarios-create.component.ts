@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Usuario } from 'src/app/components/models/usuario';
 import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
@@ -22,46 +23,58 @@ export class UsuariosCreateComponent {
       routerLink: 'usuarios'
     }
   }
-  userObj = {
-    id: '',
-    first_name: '',
-    last_name: '',
-    password: '',
-    perfil: '',
-    user_name: '',
+  userObj: Usuario = {
+    Nome: '',
+    Sobrenome: '',
+    Senha: 'igest',
+    Perfil: '',
+    Igreja: '',
+    CreatedAt: '',
+    UpdatedAt: '',
+    DeletedAt: '',
   }
-  id: string = '';
-  first_name: string = '';
-  last_name: string = '';
-  password: string = '';
-  perfil: string = '';
-  user_name: string = '';
+  Nome: string = '';
+  Sobrenome: string = '';
+  Senha: string = 'igest';
+  Perfil: string = '';
+  Igreja: string = '';
+  CreatedAt: string = '';
+  UpdatedAt: string = '';
+  DeletedAt: string = '';
 
   resetForm()
   {
-    this.id = '';
-    this.first_name = '';
-    this.last_name = '';
-    this.password = '';
-    this.perfil = '';
-    this.user_name = '';
+    this.Nome = '';
+    this.Sobrenome = '';
+    this.Perfil = '';
+    this.Igreja = '';
+    this.CreatedAt = '';
+    this.UpdatedAt = '';
+    this.DeletedAt = '';
   }
 
   addUser()
   {
-    if(this.first_name == '' || this.last_name == '' || this.password == '' || this.perfil == '')
+    const token = localStorage.getItem('token');
+    const dados = token?.split('.') ? token.split('.') : '';
+
+    if(this.Nome == '' || this.Sobrenome == '' || this.Perfil == '')
     {
       this.snack.openSnackBar('Preencha todos os campos', 2000);
     }
     else 
     {
-      this.userObj.id = '';
-      this.userObj.first_name = this.first_name;
-      this.userObj.last_name = this.last_name;
-      this.userObj.password = this.password;
-      this.userObj.perfil = this.perfil;
-      this.userObj.user_name = `${this.first_name.toLowerCase()}.${this.last_name.toLowerCase()}`;
-      // this.data.addUser(this.userObj)
+      this.userObj.Nome = this.Nome;
+      this.userObj.Sobrenome = this.Sobrenome;
+      this.userObj.Senha = this.Senha;
+      this.userObj.Perfil = this.Perfil;
+
+      this.userObj.Igreja = dados[2];
+      this.userObj.CreatedAt = `${new Date()}`;
+      this.userObj.UpdatedAt = `${new Date()}`;
+      this.userObj.DeletedAt = '';
+
+      this.data.addUser(this.userObj)
       this.resetForm()
       this.snack.openSnackBar('Criado com sucesso!')
     }

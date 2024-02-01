@@ -10,12 +10,14 @@
                 Suporte
             </button>
         </div>
-        <a class="password" (click)="editPassword()">Alterar a senha</a>
-        <mat-icon *ngIf="!theme" (click)="isTheme('dark-theme')">
-            brightness_high
-        </mat-icon>
-        <mat-icon *ngIf="theme" (click)="isTheme('')">
-            brightness_3
-        </mat-icon>
+        <fieldset class="box">
+            <a class="password" (click)="editPassword()">Alterar a senha</a>
+            <mat-icon *ngIf="!theme" (click)="isTheme('dark-theme')">
+                brightness_high
+            </mat-icon>
+            <mat-icon *ngIf="theme" (click)="isTheme('')">
+                brightness_3
+            </mat-icon>            
+        </fieldset>
     </mat-card>
 </div>
