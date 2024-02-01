@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   {
     dados.Sistemas.forEach((element: any) =>
       {
-        console.log(element.sistema)
+        console.log(element)
         this.data.getPerfil(element.sistema).subscribe((res: any) =>
         {
           if(res[0].Ativo)
@@ -73,6 +73,8 @@ export class HomeComponent implements OnInit {
       perfil: sis?.includes('Perfil') ? true : false,
       perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
     }
+
+    console.log(this.perfil.perfilData)
   }
 }
 

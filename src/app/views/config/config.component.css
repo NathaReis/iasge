@@ -39,3 +39,10 @@
     background-color: var(--background);
     color: var(--textColor);
 }
+
+.theme
+{
+    margin-top: 2vh;
+    color: var(--textColor);
+    cursor: pointer;
+}

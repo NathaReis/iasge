@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit{
 
   get title(): string
   {
-    return this.headerService.headerData.title;
+    return String(this.headerService.headerData.title).toUpperCase();
   }
   get icon(): string
   {
@@ -97,7 +97,6 @@ export class HeaderComponent implements OnInit{
   {
     dados.Sistemas.forEach((element: any) =>
       {
-        console.log(element.sistema)
         this.dataService.getPerfil(element.sistema).subscribe((res: any) =>
         {
           if(res[0].Ativo)

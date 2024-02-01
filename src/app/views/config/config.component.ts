@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Perfil } from 'src/app/components/models/perfil';
 import { AuthService } from 'src/app/components/services/auth.service';
-import { DataService } from 'src/app/components/services/data.service';
+import { BodyService } from 'src/app/components/services/body.service';
 import { HeaderService } from 'src/app/components/services/header.service';
-import { PerfilService } from 'src/app/components/services/perfil.service';
 import { SnackbarService } from 'src/app/components/services/snackbar.service';
 import { DialogConfirmationComponent } from 'src/app/components/template/dialog-confirmation/dialog-confirmation.component';
 
@@ -19,13 +17,12 @@ export class ConfigComponent implements OnInit{
 
   constructor(
     private auth : AuthService,
-    private data : DataService,
-    private perfil : PerfilService,
     private dialog: MatDialog,
     private snack: SnackbarService,
+    private bodyService: BodyService,
     private headerService: HeaderService) {
       headerService.headerData = {
-        title: 'Config',
+        title: 'Config.',
         icon: 'settings',
         routerLink: 'config'
       }
@@ -33,21 +30,6 @@ export class ConfigComponent implements OnInit{
 
   ngOnInit(): void {
     this.auth.auth_guard();
-    this.perfilSave();
-  }
-
-  perfilSave()
-  {
-    // this.perfil.perfilData = {
-    //   departamentos: localStorage.getItem("departamentos") ? true : false,
-    //   associados: localStorage.getItem("associados") ? true : false,
-    //   eventos: localStorage.getItem("eventos") ? true : false,
-    //   type: String(localStorage.getItem("logado")),
-    //   all_view: localStorage.getItem("all_view") ? true : false,
-    //   escalas: true,
-    //   config: true,
-    //   home: true
-    // }
   }
 
   logout()
@@ -84,5 +66,13 @@ export class ConfigComponent implements OnInit{
         this.snack.openSnackBar(`Erro ao copiar o número de suporte!`, 3000);
         console.log(erro);
       })
+  }
+
+  isTheme(type: string)
+  {
+    localStorage.setItem("theme", type);
+    this.bodyService.appTheme = {
+      theme: type
+    };
   }
 }

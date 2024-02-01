@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from '../models/usuario';
 import { Igreja } from '../models/igreja';
 import { Perfil } from '../models/perfil';
+import { PerfilService } from './perfil.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
     private router : Router,
     private snack: SnackbarService,
     private data : DataService,
+    private perfil: PerfilService,
     private afs : AngularFirestore
     ) { }
   
@@ -58,6 +60,15 @@ export class AuthService {
   logout() 
   {
     localStorage.removeItem('token')
+    this.perfil.perfilData = {
+      eventos: false,
+      escalas: false,
+      usuarios: false,
+      igrejas: false,
+      config: false,
+      perfil: false,
+      perfilsistemas: false,
+    }
     this.router.navigate(['login']);
   }
   // Login

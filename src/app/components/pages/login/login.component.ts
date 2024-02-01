@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private snack: SnackbarService,
-    private perfil: PerfilService,
     private headerService: HeaderService) 
     {
       headerService.headerData = {
@@ -26,16 +25,6 @@ export class LoginComponent implements OnInit {
         icon: 'login',
         routerLink: 'login'
       }
-      // perfil.perfilData = {
-      //   type: '',
-      //   eventos: false,
-      //   departamentos: false,
-      //   associados: false,
-      //   all_view: false,
-      //   escalas: false,
-      //   config: false,
-      //   home: false
-      // }
     }
 
   ngOnInit(): void {

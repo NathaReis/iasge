@@ -1,23 +1,16 @@
 <mat-toolbar class="header">
     <nav class="nav">
         <a (click)="back()" class="logo">i</a>
+        <a [routerLink]="routerLink" class="name_page">{{ title }}</a>
         <button class="hamburguer" (click)="navMenu()"></button>
         <ul class="nav-list">
-            <li><a routerLink="home">Sobre</a></li>
-            <li *ngIf="escalas"><a routerLink="escalas">Escalas</a></li>
-            <li *ngIf="eventos"><a routerLink="eventos">Eventos</a></li>
-            <li *ngIf="usuarios"><a routerLink="usuarios">Usuários</a></li>
-            <li *ngIf="igrejas"><a routerLink="igrejas">Igrejas</a></li>
-            <li *ngIf="config"><a routerLink="config">Configurações</a></li>
+            <li><a (click)="navMenu()" routerLink="home">Sobre</a></li>
+            <li *ngIf="escalas"><a (click)="navMenu()" routerLink="escalas">Escalas</a></li>
+            <li *ngIf="eventos"><a (click)="navMenu()" routerLink="eventos">Eventos</a></li>
+            <li *ngIf="usuarios"><a (click)="navMenu()" routerLink="usuarios">Usuários</a></li>
+            <li *ngIf="igrejas"><a (click)="navMenu()" routerLink="igrejas">Igrejas</a></li>
+            <li *ngIf="config"><a (click)="navMenu()" routerLink="config">Configurações</a></li>
         </ul>
     </nav>
-    <!-- <span class="theme">
-        <mat-icon *ngIf="!theme" (click)="isTheme('dark-theme')">
-            brightness_high
-        </mat-icon>
-        <mat-icon *ngIf="theme" (click)="isTheme('')">
-            brightness_3
-        </mat-icon>
-    </span> -->
 </mat-toolbar>
            

@@ -15,23 +15,12 @@ export class UsuariosCreateComponent {
   constructor( 
     private data : DataService,
     private snack: SnackbarService,
-    private perfilService: PerfilService,
     private headerService: HeaderService) {
     headerService.headerData = {
       title: 'Usuários',
       icon: 'house',
       routerLink: 'usuarios'
     }
-    // perfilService.perfilData = {
-    //   departamentos: localStorage.getItem("departamentos") ? true : false,
-    //   associados: localStorage.getItem("associados") ? true : false,
-    //   eventos: localStorage.getItem("eventos") ? true : false,
-    //   type: String(localStorage.getItem("logado")),
-    //   all_view: localStorage.getItem("all_view") ? true : false,
-    //   escalas: true,
-    //   config: true,
-    //   home: true
-    // }
   }
   userObj = {
     id: '',
