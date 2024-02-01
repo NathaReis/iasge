@@ -1,3 +1,4 @@
+import { CodePagesPermissionsService } from 'src/app/components/services/code-pages-permissions.service';
 import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../services/header.service';
 import { PerfilService } from '../../services/perfil.service';
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit{
     private headerService: HeaderService,
     private perfilService: PerfilService,
     private dataService: DataService,
+    private codePagesPermissions: CodePagesPermissionsService,
     private bodyService: BodyService) {}
 
   get title(): string
@@ -99,31 +101,32 @@ export class HeaderComponent implements OnInit{
       {
         this.dataService.getPerfil(element.sistema).subscribe((res: any) =>
         {
-          if(res[0].Ativo)
+          if(res[0].Ativo && element.visualizar)
           {
+            const dados = this.codePagesPermissions.encryptPage(element);
             if(localStorage.getItem('sis'))
             {
-              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + element.sistema);
+              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + dados);
             }
             else 
             {
-              localStorage.setItem('sis', element.sistema);
+              localStorage.setItem('sis', dados);
             }
           }
         })
       })
 
-    const sis = localStorage.getItem('sis')?.split('.');
+      const sis = this.codePagesPermissions.descryptSistema();
 
-    this.perfilService.perfilData = {
-      eventos: sis?.includes('Evento') ? true : false,
-      escalas: sis?.includes('Escala') ? true : false,
-      usuarios: sis?.includes('Usuários') ? true : false,
-      igrejas: sis?.includes('Igreja') ? true : false,
-      config: sis?.includes('Configurações') ? true : false,
-      perfil: sis?.includes('Perfil') ? true : false,
-      perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
-    }
+      this.perfilService.perfilData = {
+        eventos: sis?.includes('Evento') ? true : false,
+        escalas: sis?.includes('Escala') ? true : false,
+        usuarios: sis?.includes('Usuários') ? true : false,
+        igrejas: sis?.includes('Igreja') ? true : false,
+        config: sis?.includes('Configurações') ? true : false,
+        perfil: sis?.includes('Perfil') ? true : false,
+        perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
+      }
   }
 
   navMenu(): void {

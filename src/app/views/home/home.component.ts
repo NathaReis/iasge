@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pisistemas } from 'src/app/components/models/pisistemas';
 import { AuthService } from 'src/app/components/services/auth.service';
+import { CodePagesPermissionsService } from 'src/app/components/services/code-pages-permissions.service';
 import { DataService } from 'src/app/components/services/data.service';
 import { HeaderService } from 'src/app/components/services/header.service';
 import { PerfilService } from 'src/app/components/services/perfil.service';
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
     private data: DataService,
     private snack: SnackbarService,
     private perfil: PerfilService,
+    private code: CodePagesPermissionsService,
     private headerService: HeaderService) {
       headerService.headerData = {
         title: 'Home',
@@ -44,25 +46,25 @@ export class HomeComponent implements OnInit {
   perfilSave(dados: Pisistemas)
   {
     dados.Sistemas.forEach((element: any) =>
-      {
-        console.log(element)
+    {
         this.data.getPerfil(element.sistema).subscribe((res: any) =>
         {
-          if(res[0].Ativo)
+          if(res[0].Ativo && element.visualizar)
           {
+            const dados = this.code.encryptPage(element);
             if(localStorage.getItem('sis'))
             {
-              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + element.sistema);
+              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + dados);
             }
             else 
             {
-              localStorage.setItem('sis', element.sistema);
+              localStorage.setItem('sis', dados);
             }
           }
         })
       })
 
-    const sis = localStorage.getItem('sis')?.split('.');
+    const sis = this.code.descryptSistema();
 
     this.perfil.perfilData = {
       eventos: sis?.includes('Evento') ? true : false,
@@ -73,8 +75,6 @@ export class HomeComponent implements OnInit {
       perfil: sis?.includes('Perfil') ? true : false,
       perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
     }
-
-    console.log(this.perfil.perfilData)
   }
 }
 
