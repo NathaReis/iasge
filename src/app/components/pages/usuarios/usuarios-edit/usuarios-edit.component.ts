@@ -108,7 +108,7 @@ export class UsuariosEditComponent implements OnInit{
       this.userObj.Perfil = this.Perfil;
 
       this.userObj.Igreja = dados[2];
-      this.userObj.CreatedAt = `${new Date()}`;
+      this.userObj.CreatedAt = this.CreatedAt;
       this.userObj.UpdatedAt = `${new Date()}`;
       this.userObj.DeletedAt = this.DeletedAt;
       this.data.updateUser(this.userObj, this.id)

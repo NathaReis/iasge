@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
 
   perfilSave(dados: Pisistemas)
   {
+    localStorage.setItem('sis', '');
     dados.Sistemas.forEach((element: any) =>
     {
         this.data.getPerfil(element.sistema).subscribe((res: any) =>
@@ -64,17 +65,19 @@ export class HomeComponent implements OnInit {
         })
       })
 
-    const sis = this.code.descryptSistema();
-
-    this.perfil.perfilData = {
-      eventos: sis?.includes('Evento') ? true : false,
-      escalas: sis?.includes('Escala') ? true : false,
-      usuarios: sis?.includes('Usuários') ? true : false,
-      igrejas: sis?.includes('Igreja') ? true : false,
-      config: sis?.includes('Configurações') ? true : false,
-      perfil: sis?.includes('Perfil') ? true : false,
-      perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
-    }
+    this.code.descryptSistema()
+    .then((sis) => 
+    {
+      this.perfil.perfilData = {
+        eventos: sis?.includes('Evento') ? true : false,
+        escalas: sis?.includes('Escala') ? true : false,
+        usuarios: sis?.includes('Usuários') ? true : false,
+        igrejas: sis?.includes('Igreja') ? true : false,
+        config: sis?.includes('Configurações') ? true : false,
+        perfil: sis?.includes('Perfil') ? true : false,
+        perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
+      }
+    })
   }
 }
 

@@ -97,12 +97,14 @@ export class HeaderComponent implements OnInit{
 
   perfilSave(dados: Pisistemas)
   {
+    localStorage.setItem('sis', '');
     dados.Sistemas.forEach((element: any) =>
       {
         this.dataService.getPerfil(element.sistema).subscribe((res: any) =>
         {
           if(res[0].Ativo && element.visualizar)
           {
+            console.log(element)
             const dados = this.codePagesPermissions.encryptPage(element);
             if(localStorage.getItem('sis'))
             {
@@ -116,18 +118,21 @@ export class HeaderComponent implements OnInit{
         })
       })
 
-      const sis = this.codePagesPermissions.descryptSistema();
-
-      this.perfilService.perfilData = {
-        eventos: sis?.includes('Evento') ? true : false,
-        escalas: sis?.includes('Escala') ? true : false,
-        usuarios: sis?.includes('Usuários') ? true : false,
-        igrejas: sis?.includes('Igreja') ? true : false,
-        config: sis?.includes('Configurações') ? true : false,
-        perfil: sis?.includes('Perfil') ? true : false,
-        perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
-      }
-  }
+      this.codePagesPermissions.descryptSistema()
+      .then((sis) => 
+      {
+        console.log(sis)
+        this.perfilService.perfilData = {
+          eventos: sis?.includes('Evento') ? true : false,
+          escalas: sis?.includes('Escala') ? true : false,
+          usuarios: sis?.includes('Usuários') ? true : false,
+          igrejas: sis?.includes('Igreja') ? true : false,
+          config: sis?.includes('Configurações') ? true : false,
+          perfil: sis?.includes('Perfil') ? true : false,
+          perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
+        }
+      })
+    }
 
   navMenu(): void {
     const nav = document.querySelector(".nav");

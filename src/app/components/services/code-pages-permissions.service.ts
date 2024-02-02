@@ -73,17 +73,20 @@ export class CodePagesPermissionsService {
     this.res += ''
   }
 
-  descryptSistema()
+  async descryptSistema(): Promise<any>
   {
-    this.res = '';
-    let blackList: string[] = [];
-    let dados = localStorage.getItem('sis');
-    let list = dados?.split('.');
-    list?.forEach(li => {
-      const sistema = this.descryptSistemaCode(String(li.match(/[0-9]{3}/)?.map(el => el)[0]));
-      blackList.includes(sistema) ? null : blackList.push(sistema);
-    })
-    return blackList;
+    setTimeout(() => 
+    {
+      this.res = '';
+      let blackList: string[] = [];
+      let dados = localStorage.getItem('sis');
+      let list = dados?.split('.');
+      list?.forEach(li => {
+        const sistema = this.descryptSistemaCode(String(li.match(/[0-9]{3}/)?.map(el => el)[0]));
+        blackList.includes(sistema) ? null : blackList.push(sistema);
+      })
+      return blackList;
+    }, 2000)
   }
 
   descryptSistemaCode(sis: string)

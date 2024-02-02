@@ -5,7 +5,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    filter: invert(80%) brightness(60%);
+    filter: brightness(90%);
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.486);
     height: 50vh;
     padding: 10vh;

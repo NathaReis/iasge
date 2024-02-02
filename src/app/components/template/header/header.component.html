@@ -1,6 +1,8 @@
 <mat-toolbar class="header">
     <nav class="nav">
-        <a (click)="back()" class="logo">i</a>
+        <a (click)="back()" class="logo">
+            <img src="../../../../assets/logo.png" alt="i">
+        </a>
         <a [routerLink]="routerLink" class="name_page">{{ title }}</a>
         <button class="hamburguer" (click)="navMenu()"></button>
         <ul class="nav-list">

@@ -14,7 +14,7 @@ export class DialogConfirmationComponent implements OnInit{
 
   constructor(
     public dialogRef: MatDialogRef<DialogConfirmationComponent>,
-    private dataS: DataService,
+    private dataService: DataService,
     private snack: SnackbarService,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: Dialog,
@@ -39,32 +39,48 @@ export class DialogConfirmationComponent implements OnInit{
   }
 
   //Password
-  // user: User = {
-  //   // id: '',
-  //   // user_name: '',
-  //   // first_name: '',
-  //   last_name: '',
-  //   password: '',
-  //   perfil: '',
-  //   departamentos: '',  
-  // };
-  user_name: string = String(localStorage.getItem("usermask_name"));
-  passwordAtual: string = '';
-  password: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
+  userObj: Usuario = {
+    Nome: '',
+    Sobrenome: '',
+    Senha: 'igest',
+    Perfil: '',
+    Igreja: '',
+    CreatedAt: '',
+    UpdatedAt: '',
+    DeletedAt: '',
+  }
+  Id: string = '';
+  Nome: string = '';
+  SenhaAtual: string = '';
+  Senha: string = '';
+  NovaSenha: string = '';
+  ConfirmarSenha: string = '';
   hide = true;
   hideNew = true;
   hideConfirm = true;
 
   getUser()
   {
-    this.dataS.getUser(String(localStorage.getItem("usermask_id"))).subscribe((res: any) =>
+    this.dataService.getAllUsers().subscribe(res =>
       {
         if(res)
         {
-          this.passwordAtual = res.data().password;
-          // this.user = res.data();
+          const token = localStorage.getItem('token');
+          const dados = token?.split('.') ? token.split('.') : '';
+  
+          //Mapeia o resultado
+          let usuarios = res.map((e: any) =>
+            {
+              const data = e.payload.doc.data();
+              data.id = e.payload.doc.id;
+              return data;
+            })
+          usuarios = usuarios.filter(user => user.id == dados[0]);
+          const usuario = usuarios[0];
+          this.Nome = usuario.Nome;
+          this.SenhaAtual = usuario.Senha;
+          this.Id = dados[0];
+          this.userObj = usuario;
         }
         else 
         {
@@ -75,12 +91,12 @@ export class DialogConfirmationComponent implements OnInit{
 
   salvePassword()
   {
-    if(this.password == this.passwordAtual)
+    if(this.Senha == this.SenhaAtual)
     {
-      if(this.newPassword == this.confirmPassword)
+      if(this.NovaSenha == this.ConfirmarSenha)
       {
-        // this.user.password = this.newPassword;
-        // this.dataS.updateUser(this.user, String(localStorage.getItem("usermask_id")))
+        this.userObj.Senha = this.NovaSenha;
+        this.dataService.updateUser(this.userObj, this.Id);
         this.onConfirm(true);
       }
       else 

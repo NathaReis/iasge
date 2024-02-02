@@ -40,11 +40,6 @@ export class DataService {
   {
     return this.afs.collection('/usuario').add(user);
   }
-  // delete 
-  deleteUser(user: Usuario, id: string)
-  {
-    return this.afs.doc(`/usuario/${id}`).update(user);
-  }
   // update 
   updateUser(user: Usuario, id: string)
   {

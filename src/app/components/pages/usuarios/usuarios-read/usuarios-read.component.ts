@@ -7,6 +7,7 @@ import { HeaderService } from 'src/app/components/services/header.service';
 import { DialogConfirmationComponent } from 'src/app/components/template/dialog-confirmation/dialog-confirmation.component';
 import { SnackbarService } from 'src/app/components/services/snackbar.service';
 import { DataService } from 'src/app/components/services/data.service';
+import { CodePagesPermissionsService } from 'src/app/components/services/code-pages-permissions.service';
 
 @Component({
   selector: 'app-usuarios-read',
@@ -15,10 +16,13 @@ import { DataService } from 'src/app/components/services/data.service';
 })
 export class UsuariosReadComponent implements AfterViewInit, OnInit{
 
+  permission = {criar: false, excluir: false};
+
   constructor(
     private data: DataService,
     private snack: SnackbarService,
     private dialog: MatDialog,
+    private codePages: CodePagesPermissionsService,
     private headerService: HeaderService) {
     headerService.headerData = {
       title: 'Usuários',
@@ -40,6 +44,7 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
   usersList: Usuario[] = [];
   ngOnInit(): void {
     this.getAllUsers()
+    this.permission = this.codePages.descryptPermissions('Usuários');
   }
 
   getAllUsers()
@@ -74,7 +79,7 @@ export class UsuariosReadComponent implements AfterViewInit, OnInit{
   delete(usuario: Usuario, id: string)
   {
     usuario.DeletedAt = `${new Date()}`;
-    this.data.deleteUser(usuario, id).finally(() => {
+    this.data.updateUser(usuario, id).finally(() => {
       location.reload();
     })
   }

@@ -1,4 +1,9 @@
 <div class="mat-elevation-z8">
+    <div *ngIf="permission.criar" class="btns">
+      <button mat-fab class="add" routerLink="create">
+          <mat-icon>add</mat-icon>
+      </button>
+    </div>
     <table mat-table [dataSource]="dataSource">
   
       <!-- Position Column -->
@@ -17,8 +22,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Ações </th>
         <td mat-cell *matCellDef="let element"> 
-          <mat-icon class="edit" routerLink="edit/{{ element.id }}">edit</mat-icon>
-          <mat-icon class="delete" (click)="deleteUser(element.id, element.Nome)">delete</mat-icon>
+          <mat-icon *ngIf="permission.criar" class="edit" routerLink="edit/{{ element.id }}">edit</mat-icon>
+          <mat-icon *ngIf="permission.excluir" class="delete" (click)="deleteUser(element.id, element.Nome)">delete</mat-icon>
         </td>
       </ng-container>
   

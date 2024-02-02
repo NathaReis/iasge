@@ -19,7 +19,6 @@ export class UsuariosComponent {
       routerLink: 'usuarios'
     }
   }
-  visibility = true;
 
   ngOnInit(): void {
     this.auth.auth_guard();
