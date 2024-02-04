@@ -91,7 +91,7 @@ export class DialogConfirmationComponent implements OnInit{
 
   salvePassword()
   {
-    if(this.Senha == this.SenhaAtual)
+    if(this.Senha == this.SenhaAtual) 
     {
       if(this.NovaSenha == this.ConfirmarSenha)
       {

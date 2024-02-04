@@ -8,26 +8,27 @@ export class PerfilService{
 
   constructor() { }
 
-  _perfilData = new BehaviorSubject<{escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfil: boolean, perfilsistemas: boolean}>({
+  _perfilData = new BehaviorSubject<{escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfis: boolean, perfilsistemas: boolean, distritos: boolean}>({
     escalas: false,
     eventos: false,
     usuarios: false,
-    igrejas: false,
     config: false,
-
-    perfil: false,
+    
+    perfis: false,
+    igrejas: false,
+    distritos: false,
     perfilsistemas: false,
   });
 
 
   // métodos
 
-  get perfilData(): {escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfil: boolean, perfilsistemas: boolean} 
+  get perfilData(): {escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfis: boolean, perfilsistemas: boolean, distritos: boolean} 
   {
     return this._perfilData.value;
   }//Busca
 
-  set perfilData(perfilData: {escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfil: boolean, perfilsistemas: boolean})
+  set perfilData(perfilData: {escalas: boolean, eventos: boolean, usuarios: boolean, igrejas: boolean, config: boolean, perfis: boolean, perfilsistemas: boolean, distritos: boolean})
   {
     this._perfilData.next(perfilData)
   }//Edita

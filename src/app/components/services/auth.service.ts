@@ -1,3 +1,4 @@
+import { Sistema } from './../models/sistema';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
@@ -7,6 +8,7 @@ import { Usuario } from '../models/usuario';
 import { Igreja } from '../models/igreja';
 import { Perfil } from '../models/perfil';
 import { PerfilService } from './perfil.service';
+import { CodePagesPermissionsService } from './code-pages-permissions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class AuthService {
     private router : Router,
     private snack: SnackbarService,
     private data : DataService,
+    private code: CodePagesPermissionsService,
     private perfil: PerfilService,
     private afs : AngularFirestore
     ) { }
@@ -59,38 +62,70 @@ export class AuthService {
   // Logout
   logout() 
   {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('sis');
     this.perfil.perfilData = {
       eventos: false,
       escalas: false,
       usuarios: false,
       igrejas: false,
       config: false,
-      perfil: false,
+      perfis: false,
+      distritos: false,
       perfilsistemas: false,
     }
     this.router.navigate(['login']);
   }
   // Login
-  logar(dados: any) 
+  logar(dadosParams: any) 
+  {
+    let start = 0;
+    let end = 0;
+    this.data.getPerfilSistemas(dadosParams[1],dadosParams[2]).subscribe((res: any) =>
+    {
+      end = res[0].Sistemas.length;
+
+      res[0].Sistemas.forEach((element: any) =>
+      {
+        this.data.getPerfil(element.sistema).subscribe((res: any) =>
+        {
+          start++;
+          if(res[0].Ativo && element.visualizar)
+          {
+            const dados = this.code.encryptPage(element);
+            if(localStorage.getItem('sis'))
+            {
+              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + dados);
+            }
+            else 
+            {
+              localStorage.setItem('sis', dados);
+            }//Salva no localStorage
+            if(start == end)
+            {
+              this.entrar(dadosParams);
+            }
+          }//Valida se a página está ativa e pode ser visualizada
+        })//Passa pelo registro para ver se está ativo
+      })//Passa por cada sistema
+    }, err => 
+    {
+      //Mensagem de erro
+      console.log(`Erro de busca: ${err}`);
+    })//Pesquisa do perfiligrejasistemas usando perfil/igreja
+  }
+
+  entrar(dados: any)
   {
     let token = '';
-
     //IdUser 0
     token = `${dados[0]}.`;
-
     //IdPerfil 1
     token += `${dados[1]}.`
-
     //IdIgreja 2
-    token += `${dados[2]}.`;
-
-
+    token += `${dados[2]}`;
     // //IdMasck 3
     // token += `${dados[0]}`
-    
-    
-
     localStorage.setItem('token', token);
     this.router.navigate(['home']);
   }

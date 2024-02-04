@@ -87,7 +87,7 @@ a
     transition: .3s;
 }
 
-@media (max-width: 750px)
+@media (max-width: 1000px)
 {
     .hamburguer
     {

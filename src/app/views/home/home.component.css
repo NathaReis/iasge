@@ -1,7 +1,7 @@
 .card
 {
     font-family: 'Caveat', cursive;
-    background: url(../../../assets/yellow.jpg);
+    background: url(../../../assets/yellow1000.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -56,7 +56,7 @@
     width: 100vw;
     height: 60vh;
 
-    background: url(../../../assets/nature.jpg);
+    background: url(../../../assets/nature1000.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

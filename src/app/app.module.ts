@@ -66,6 +66,10 @@ import { FormEventComponent } from './components/template/form-event/form-event.
 import { EventosEditComponent } from './components/pages/eventos/eventos-edit/eventos-edit.component';
 import { EscalasEditComponent } from './components/pages/escalas/escalas-edit/escalas-edit.component';
 import { FormEscalaComponent } from './components/template/form-escala/form-escala.component';
+import { PerfilComponent } from './components/pages/perfil/perfil.component';
+import { IgrejaComponent } from './components/pages/igreja/igreja.component';
+import { DistritoComponent } from './components/pages/distrito/distrito.component';
+import { PerfiligrejasistemasComponent } from './views/perfiligrejasistemas/perfiligrejasistemas.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +99,10 @@ import { FormEscalaComponent } from './components/template/form-escala/form-esca
     UsuariosReadComponent,
     UsuariosEditComponent,
     UsuariosCreateComponent,
+    PerfilComponent,
+    IgrejaComponent,
+    DistritoComponent,
+    PerfiligrejasistemasComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(ambiente.firebaseConfig),

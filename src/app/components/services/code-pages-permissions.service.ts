@@ -47,6 +47,9 @@ export class CodePagesPermissionsService {
       case 'Escala':
         this.res += '728';
         break;
+      case 'Distrito':
+        this.res += '884';
+        break;
     }
   }
 
@@ -73,20 +76,17 @@ export class CodePagesPermissionsService {
     this.res += ''
   }
 
-  async descryptSistema(): Promise<any>
+  descryptSistema()
   {
-    setTimeout(() => 
-    {
-      this.res = '';
-      let blackList: string[] = [];
-      let dados = localStorage.getItem('sis');
-      let list = dados?.split('.');
-      list?.forEach(li => {
-        const sistema = this.descryptSistemaCode(String(li.match(/[0-9]{3}/)?.map(el => el)[0]));
-        blackList.includes(sistema) ? null : blackList.push(sistema);
-      })
-      return blackList;
-    }, 2000)
+    this.res = '';
+    let blackList: string[] = [];
+    let dados = localStorage.getItem('sis');
+    let list = dados?.split('.');
+    list?.forEach(li => {
+      const sistema = this.descryptSistemaCode(String(li.match(/[0-9]{3}/)?.map(el => el)[0]));
+      blackList.includes(sistema) ? null : blackList.push(sistema);
+    })
+    return blackList;
   }
 
   descryptSistemaCode(sis: string)
@@ -114,6 +114,9 @@ export class CodePagesPermissionsService {
         break;
       case '728':
         this.res += 'Escala';
+        break;
+      case '884':
+        this.res += 'Distrito';
         break;
     }
     return this.res;

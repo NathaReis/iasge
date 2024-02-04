@@ -30,6 +30,14 @@ export class ConfigComponent implements OnInit{
 
   ngOnInit(): void {
     this.auth.auth_guard();
+    if(localStorage.getItem("theme") != 'dark-theme')
+    {
+      this.theme = false;
+    }
+    else 
+    {
+      this.theme = true;
+    }
   }
 
   logout()

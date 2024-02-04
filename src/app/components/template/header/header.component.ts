@@ -4,7 +4,6 @@ import { HeaderService } from '../../services/header.service';
 import { PerfilService } from '../../services/perfil.service';
 import { BodyService } from '../../services/body.service';
 import { DataService } from '../../services/data.service';
-import { Pisistemas } from '../../models/pisistemas';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +15,7 @@ export class HeaderComponent implements OnInit{
   constructor(
     private headerService: HeaderService,
     private perfilService: PerfilService,
-    private dataService: DataService,
-    private codePagesPermissions: CodePagesPermissionsService,
+    private code: CodePagesPermissionsService,
     private bodyService: BodyService) {}
 
   get title(): string
@@ -54,6 +52,18 @@ export class HeaderComponent implements OnInit{
   {
     return this.perfilService.perfilData.igrejas;
   }
+  get distritos(): boolean
+  {
+    return this.perfilService.perfilData.distritos;
+  }
+  get perfis(): boolean
+  {
+    return this.perfilService.perfilData.perfis;
+  }
+  get perfilsistemas(): boolean
+  {
+    return this.perfilService.perfilData.perfilsistemas;
+  }
 
   //Body
   get theme(): boolean 
@@ -70,21 +80,7 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    const dados = token?.split('.') ? token.split('.') : '';
-
-    if(token)
-    {
-      this.dataService.getPerfilSistemas(dados[1],dados[2]).subscribe((res: any) =>
-      {
-        this.perfilSave(res[0]);
-      }, err => 
-      {
-        //Mensagem de erro
-        console.log(`Erro de busca: ${err}`);
-      })//Pesquisa do sistema usando perfil/igreja
-    }
-
+    this.perfil();
     if(localStorage.getItem("theme") != 'dark-theme')
     {
       this.isTheme('');
@@ -95,44 +91,21 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  perfilSave(dados: Pisistemas)
+  perfil()
   {
-    localStorage.setItem('sis', '');
-    dados.Sistemas.forEach((element: any) =>
-      {
-        this.dataService.getPerfil(element.sistema).subscribe((res: any) =>
-        {
-          if(res[0].Ativo && element.visualizar)
-          {
-            console.log(element)
-            const dados = this.codePagesPermissions.encryptPage(element);
-            if(localStorage.getItem('sis'))
-            {
-              localStorage.setItem('sis', localStorage.getItem('sis') + '.' + dados);
-            }
-            else 
-            {
-              localStorage.setItem('sis', dados);
-            }
-          }
-        })
-      })
+    const sis = this.code.descryptSistema();
 
-      this.codePagesPermissions.descryptSistema()
-      .then((sis) => 
-      {
-        console.log(sis)
-        this.perfilService.perfilData = {
-          eventos: sis?.includes('Evento') ? true : false,
-          escalas: sis?.includes('Escala') ? true : false,
-          usuarios: sis?.includes('Usuários') ? true : false,
-          igrejas: sis?.includes('Igreja') ? true : false,
-          config: sis?.includes('Configurações') ? true : false,
-          perfil: sis?.includes('Perfil') ? true : false,
-          perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
-        }
-      })
+    this.perfilService.perfilData = {
+      eventos: sis?.includes('Evento') ? true : false,
+      escalas: sis?.includes('Escala') ? true : false,
+      usuarios: sis?.includes('Usuários') ? true : false,
+      igrejas: sis?.includes('Igreja') ? true : false,
+      config: sis?.includes('Configurações') ? true : false,
+      perfis: sis?.includes('Perfil') ? true : false,
+      distritos: sis?.includes('Distrito') ? true : false,
+      perfilsistemas: sis?.includes('Perfil Sistemas') ? true : false,
     }
+  }
 
   navMenu(): void {
     const nav = document.querySelector(".nav");
